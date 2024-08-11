@@ -2,7 +2,6 @@
 
 <p align="center">
 
-  https://github.com/user-attachments/assets/5aa35c98-ba13-49fb-a799-828b19b3f9d0
   
   </p>
 
