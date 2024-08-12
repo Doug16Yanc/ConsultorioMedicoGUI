@@ -99,11 +99,11 @@ public class Acoes extends JFrame implements ActionListener {
 
         if (motivo.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, cite pelo menos um sintoma que o traz aqui, isso " +
-                    "pode agilizar o trabalho do seu médico.", "Mensagem importante", JOptionPane.ERROR_MESSAGE);
+                    "pode agilizar o trabalho do seu médico.", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String agora = LocalDateTime.now().format(formatter);
 
         Medico medicoSelecionado = medicos.get(medicoComboBox.getSelectedIndex());
@@ -119,6 +119,7 @@ public class Acoes extends JFrame implements ActionListener {
     private String oficializaConsultaComMedico(Paciente paciente, Consulta consulta, Medico medico) {
         String message = "\tCOMPROVANTE DE CONSULTA.\n\n" +
                 "Código da consulta : " + consulta.id + "\n" +
+                "Data e hora da consulta : " + consulta.agora + "\n" +
                 "Identificador do(a) paciente : " + paciente.id + "\n" +
                 "Nome do(a) paciente : " + paciente.nome + "\n" +
                 "Paciente relata : " + consulta.motivo + "\n" +
