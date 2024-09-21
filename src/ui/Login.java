@@ -23,7 +23,7 @@ public class Login extends JFrame implements ActionListener {
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.insets = new Insets(10,10, 10, 10);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/medico.png"));
         Image i2 = i1.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT);
