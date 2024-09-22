@@ -10,7 +10,7 @@
   Projeto Java realizado para a disciplina de programação orientada a objetos no curso de Análise e Desenvolvimento de Sistemas. O programa permite marcar consultas, listar consultas por pacientes e listar consultas por médicos.
 </p>
 
-<h1 align="center"> Autor </h1>
+<h1 align="center"> Autores </h1>
 
 <p align="center">
 
