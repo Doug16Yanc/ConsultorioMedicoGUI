@@ -2,7 +2,6 @@ package ui;
 
 import entities.Consulta;
 import entities.Medico;
-import entities.Paciente;
 
 import javax.swing.*;
 import java.awt.*;
