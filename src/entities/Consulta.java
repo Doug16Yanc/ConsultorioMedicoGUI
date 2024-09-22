@@ -1,9 +1,10 @@
 package entities;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class Consulta {
-    private int id;
+    private UUID id;
     private String motivo;
     private String agora;
     private Paciente paciente;
@@ -12,19 +13,19 @@ public class Consulta {
     public Consulta() {
 
     }
-    public Consulta(int id, String motivo, String agora, Paciente paciente, Medico medico) {
-        this.id = id;
+    public Consulta(String motivo, String agora, Paciente paciente, Medico medico) {
+        this.id = UUID.randomUUID();
         this.motivo = motivo;
         this.agora = agora;
         this.paciente = paciente;
         this.medico = medico;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

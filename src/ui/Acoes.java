@@ -1,6 +1,7 @@
 package ui;
 
 import entities.Consulta;
+import entities.Especialidade;
 import entities.Medico;
 import entities.Paciente;
 
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class Acoes extends JFrame implements ActionListener {
 
@@ -42,7 +42,7 @@ public class Acoes extends JFrame implements ActionListener {
         JLabel medicoLabel = new JLabel("Selecione o médico:");
         medicoComboBox = new JComboBox<>();
         for (Medico medico : medicos) {
-            medicoComboBox.addItem(medico.nome + " - " + medico.especialidade + " - " + medico.CRM);
+            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade() + " - " + medico.getCRM());
         }
 
         JLabel motivoLabel = new JLabel("Motivo da consulta:");
@@ -78,11 +78,12 @@ public class Acoes extends JFrame implements ActionListener {
 
     public ArrayList<Medico> inicializaMedicos() {
         ArrayList<Medico> medicos = new ArrayList<>();
-        medicos.add(new Medico(123, "Dra. Denise Yanasse", "123456789-87", "Clínica geral", "Feminino"));
-        medicos.add(new Medico(987, "Dr. Douglas Calderoni", "987654321-78", "Ortopedista", "Masculino"));
-        medicos.add(new Medico(456, "Dr. Alceu Scanavini", "876544321-12", "Psiquiatra", "Masculino"));
-        medicos.add(new Medico(189, "Dra. Laura Arantes", "998765432-89", "Cardiologista", "Feminino"));
-        medicos.add(new Medico(834, "Dr. Thales Dalessandro", "912345678-45", "Hematologista", "Masculino"));
+        medicos.add(new Medico(123, "Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", new Especialidade("Clínica geral")));
+        medicos.add(new Medico(987, "Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678", new Especialidade("Ortopedista")));
+        medicos.add(new Medico(456, "Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", new Especialidade("Psiquiatra")));
+        medicos.add(new Medico(189, "Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", new Especialidade("Cardiologista")));
+        medicos.add(new Medico(834, "Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", new Especialidade("Hematologista")));
+
         return medicos;
     }
 
@@ -94,7 +95,6 @@ public class Acoes extends JFrame implements ActionListener {
     }
 
     public void marcaConsulta(Paciente paciente, List<Consulta> consultas) {
-        UUID id = UUID.randomUUID();
         String motivo = motivoField.getText().trim();
 
         if (motivo.isEmpty()) {
@@ -107,7 +107,7 @@ public class Acoes extends JFrame implements ActionListener {
         String agora = LocalDateTime.now().format(formatter);
 
         Medico medicoSelecionado = medicos.get(medicoComboBox.getSelectedIndex());
-        Consulta consulta = new Consulta(id, motivo, agora, paciente, medicoSelecionado);
+        Consulta consulta = new Consulta(motivo, agora, paciente, medicoSelecionado);
 
         consultas.add(consulta);
 
@@ -115,16 +115,15 @@ public class Acoes extends JFrame implements ActionListener {
 
     }
 
-
     private String oficializaConsultaComMedico(Paciente paciente, Consulta consulta, Medico medico) {
         String message = "\tCOMPROVANTE DE CONSULTA.\n\n" +
-                "Código da consulta : " + consulta.id + "\n" +
-                "Data e hora da consulta : " + consulta.agora + "\n" +
-                "Identificador do(a) paciente : " + paciente.id + "\n" +
-                "Nome do(a) paciente : " + paciente.nome + "\n" +
-                "Paciente relata : " + consulta.motivo + "\n" +
-                "Identificador do(a) médico(a) : " + medico.id + "\n" +
-                "Nome do(a) médico(a) : " + medico.nome;
+                "Código da consulta : " + consulta.getId() + "\n" +
+                "Data e hora da consulta : " + consulta.getAgora() + "\n" +
+                "Identificador do(a) paciente : " + paciente.getId() + "\n" +
+                "Nome do(a) paciente : " + paciente.getNome() + "\n" +
+                "Paciente relata : " + consulta.getMotivo() + "\n" +
+                "Identificador do(a) médico(a) : " + medico.getId() + "\n" +
+                "Nome do(a) médico(a) : " + medico.getNome();
         outputArea.setText(message);
         outputArea.setFont(new Font("Tahoma", Font.PLAIN, 20));
         return message;
