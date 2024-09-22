@@ -112,7 +112,9 @@ public class LoginPaciente extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == entrar) {
-
+            this.dispose();
+            MenuPaciente menuPaciente = new MenuPaciente(consultas);
+            menuPaciente.setVisible(true);
         }
         else if(e.getSource() == cancelar) {
             this.dispose();

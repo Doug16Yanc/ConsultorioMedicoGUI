@@ -113,7 +113,9 @@ public class LoginMedico extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == entrar) {
-
+            this.dispose();
+            MenuMedico menuMedico = new MenuMedico(consultas);
+            menuMedico.setVisible(true);
         }
         else if(e.getSource() == cancelar) {
             this.dispose();
