@@ -15,5 +15,6 @@
 <p align="center">
 
   * [Douglas Holanda](https://github.com/Doug16Yanc)
+  * [Wesley Rodrigues](https://github.com/Wesley00s)
     
 </p>
