@@ -113,26 +113,26 @@ class Consultorio extends JFrame implements ActionListener {
 
     String mostraConsultaPaciente(Consulta consulta) {
         return "********************************************************\n" +
-                "Identificador do(a) paciente : " + consulta.paciente.id + "\n" +
-                "Nome do(a) paciente : " + consulta.paciente.nome + "\n" +
-                "Email : " + consulta.paciente.email + "\n" +
-                "Telefone : " + consulta.paciente.telefone + "\n" +
-                "Identificador da consulta : " + consulta.id + "\n" +
-                "Motivo da consulta : " + consulta.motivo + "\n" +
-                "Data e hora da consulta : " + consulta.agora + "\n" +
+                "Identificador do(a) paciente : " + consulta.getPaciente().getId() + "\n" +
+                "Nome do(a) paciente : " + consulta.getPaciente().getNome() + "\n" +
+                "Email : " + consulta.getPaciente().getEmail() + "\n" +
+                "Telefone : " + consulta.getPaciente().getTelefone() + "\n" +
+                "Identificador da consulta : " + consulta.getId() + "\n" +
+                "Motivo da consulta : " + consulta.getMotivo() + "\n" +
+                "Data e hora da consulta : " + consulta.getAgora() + "\n" +
                 "********************************************************\n";
     }
 
 
     String mostraConsultaMedico(Consulta consulta) {
         return "********************************************************\n" +
-                "Identificador do(a) médico : " + consulta.medico.id + "\n" +
-                "Nome do(a) médico(a) : " + consulta.medico.nome + "\n" +
-                "CRM : " + consulta.medico.CRM + "\n" +
-                "Especialidade : " + consulta.medico.especialidade + "\n" +
-                "Identificador da consulta : " + consulta.id + "\n" +
-                "Motivo da consulta : " + consulta.motivo + "\n" +
-                "Data e hora da consulta : " + consulta.agora + "\n" +
+                "Identificador do(a) médico : " + consulta.getMedico().getId() + "\n" +
+                "Nome do(a) médico(a) : " + consulta.getMedico().getNome() + "\n" +
+                "CRM : " + consulta.getMedico().getCRM() + "\n" +
+                "Especialidade : " + consulta.getMedico().getEspecialidade() + "\n" +
+                "Identificador da consulta : " + consulta.getId() + "\n" +
+                "Motivo da consulta : " + consulta.getMotivo() + "\n" +
+                "Data e hora da consulta : " + consulta.getAgora() + "\n" +
                 "********************************************************\n";
     }
 
