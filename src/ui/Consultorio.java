@@ -58,7 +58,6 @@ class Consultorio extends JFrame implements ActionListener {
 
         setJMenuBar(mb);
         setVisible(true);
-
     }
 
     @Override

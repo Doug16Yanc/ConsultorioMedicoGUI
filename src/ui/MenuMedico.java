@@ -35,7 +35,7 @@ public class MenuMedico extends JFrame implements ActionListener {
         gbc.gridwidth = 2;
         panel.add(icon, gbc);
 
-        verConsultorio = new JButton("Marcar consulta");
+        verConsultorio = new JButton("Ver consultório");
         verConsultorio.setBackground(new Color(0x2773FF));
         verConsultorio.setForeground(Color.WHITE);
         verConsultorio.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 100));
