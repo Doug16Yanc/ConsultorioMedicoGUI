@@ -33,12 +33,12 @@ public class Login extends JFrame implements ActionListener {
 
 
         sou = new JLabel("Eu sou");
-        sou.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 30));
+        sou.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         sou.setForeground(Color.WHITE);
         add(sou);
 
         boasVindas = new JLabel("Seja bem vindo(a) ao nosso sistema!");
-        boasVindas.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 30));
+        boasVindas.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         boasVindas.setForeground(Color.WHITE);
         add(boasVindas);
 
