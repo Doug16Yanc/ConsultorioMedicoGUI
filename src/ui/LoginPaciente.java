@@ -1,6 +1,7 @@
 package ui;
 
 import entities.Consulta;
+import entities.Paciente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.util.List;
 public class LoginPaciente extends JFrame implements ActionListener {
     JButton entrar, cancelar;
     JTextField login, senha;
+    private Paciente paciente;
     private List<Consulta> consultas;
 
     class BackgroundPanel extends JPanel {
