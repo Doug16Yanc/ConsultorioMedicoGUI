@@ -20,15 +20,13 @@ class Consultorio extends JFrame implements ActionListener {
 
         setTitle("Janela do consultório");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(850, 750);
+        setSize(1920, 1080);
         setLocationRelativeTo(null);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("images/medical.png"));
-        Image i2 = i1.getImage().getScaledInstance(1500, 750, Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
-        JLabel image = new JLabel(i3);
-        add(image);
-
+        JPanel panel = new BackgroundImagePanel("src/images/medical.png");
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
         JMenuBar mb = new JMenuBar();
 
         JMenu opcoes = new JMenu("Opções");
@@ -60,7 +58,6 @@ class Consultorio extends JFrame implements ActionListener {
 
         setJMenuBar(mb);
         setVisible(true);
-
     }
 
     @Override
@@ -83,7 +80,7 @@ class Consultorio extends JFrame implements ActionListener {
         if (!consultas.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             for (Consulta consulta : consultas) {
-                sb.append(mostraConsultaPaciente(consulta)).append("\n\n");
+                sb.append(mostraConsultaPaciente(paciente, consulta)).append("\n\n");
             }
             JTextArea textArea = new JTextArea(sb.toString());
             textArea.setEditable(false);
@@ -111,7 +108,7 @@ class Consultorio extends JFrame implements ActionListener {
         }
     }
 
-    String mostraConsultaPaciente(Consulta consulta) {
+    String mostraConsultaPaciente(Paciente paciente, Consulta consulta) {
         return "********************************************************\n" +
                 "Identificador do(a) paciente : " + consulta.getPaciente().getId() + "\n" +
                 "Nome do(a) paciente : " + consulta.getPaciente().getNome() + "\n" +
