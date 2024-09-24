@@ -66,10 +66,11 @@ public class MenuPaciente extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == marcarConsulta) {
-            this.dispose();
-            Consultorio consultorio = new Consultorio(paciente, consultas);
-            consultorio.setVisible(true);
+            MarcaConsulta marcaConsulta = new MarcaConsulta(paciente, consultas);
+            marcaConsulta.setVisible(true);
         } else if (e.getSource() == verConsultas) {
+            VerConsultas verConsultas = new VerConsultas(paciente, consultas);
+            verConsultas.setVisible(true);
         }
     }
 }
