@@ -4,14 +4,11 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class InputField extends JPasswordField {
+public class InputPasswordField extends JPasswordField {
 
-    public InputField(boolean isPassword) {
+    public InputPasswordField() {
         super();
         setOpaque(false);
-        if (!isPassword) {
-            setEchoChar((char) 0); // Para mostrar caracteres normais
-        }
     }
 
     @Override

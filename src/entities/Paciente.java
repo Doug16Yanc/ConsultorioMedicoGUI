@@ -15,6 +15,7 @@ public class Paciente {
     public Paciente() {
 
     }
+
     public Paciente(int id, String nome, String email, String telefone, String login, String senha) {
         this.id = id;
         this.nome = nome;
