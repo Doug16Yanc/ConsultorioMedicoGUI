@@ -1,9 +1,12 @@
 package ui;
 
+import utilities.ComponentsFormat;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -11,53 +14,54 @@ public class RegistroMedico extends JFrame implements ActionListener {
     JLabel titulo, lblNomeMedico, lblEmailMedico, lblTelefoneMedico, lblSenhaMedico, lblCrm, lblEspecialidade;
     JTextField nomeMedico, emailMedico, telefoneMedico, senhaMedico, crm, especialidade;
     JButton btnEntrar, btnCancelar;
+    private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public RegistroMedico() {
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
+        setTitle("Registro Médico");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0,0, 0,  0);
 
-        titulo = new JLabel("Registro de Paciente");
-        titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 25));
+        titulo = new JLabel("Registro Médico");
+        titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 35));
         titulo.setPreferredSize(new Dimension(400, 40));
         titulo.setLayout(new FlowLayout(FlowLayout.CENTER));
         titulo.setForeground(Color.WHITE);
-
         add(titulo);
 
         lblNomeMedico = new JLabel("Nome");
-        formatLabel(lblNomeMedico);
-        nomeMedico = new InputField();
-        formatTextField(nomeMedico);
+        componentsFormat.formatLabel(lblNomeMedico, panel);
+        nomeMedico = new InputField(false);
+        componentsFormat.formatTextField(nomeMedico, panel);
         lblEmailMedico = new JLabel("Email");
-        formatLabel(lblEmailMedico);
-        emailMedico = new InputField();
-        formatTextField(emailMedico);
+        componentsFormat.formatLabel(lblEmailMedico, panel);
+        emailMedico = new InputField(false);
+        componentsFormat.formatTextField(emailMedico, panel);
         lblTelefoneMedico = new JLabel("Telefone");
-        formatLabel(lblTelefoneMedico);
-        telefoneMedico = new InputField();
-        formatTextField(telefoneMedico);
+        componentsFormat.formatLabel(lblTelefoneMedico, panel);
+        telefoneMedico = new InputField(false);
+        componentsFormat.formatTextField(telefoneMedico, panel);
         lblSenhaMedico = new JLabel("Senha");
-        formatLabel(lblSenhaMedico);
-        senhaMedico = new InputField();
-        formatTextField(senhaMedico);
+        componentsFormat.formatLabel(lblSenhaMedico, panel);
+        senhaMedico = new InputField(true);
+        componentsFormat.formatTextField(senhaMedico, panel);
         lblCrm = new JLabel("CRM");
-        formatLabel(lblCrm);
+        componentsFormat.formatLabel(lblCrm, panel);
         lblCrm.setPreferredSize(new Dimension(250, 50));
 
-        crm = new InputField();
-        formatTextField(crm);
-        crm.setPreferredSize(new Dimension(250, 50));
+        crm = new InputField(false);
+        componentsFormat.formatTextField(crm, panel);
+        crm.setPreferredSize(new Dimension(245, 50));
 
         lblEspecialidade = new JLabel("Especialidade");
-        formatLabel(lblEspecialidade);
+        componentsFormat.formatLabel(lblEspecialidade, panel);
         lblEspecialidade.setPreferredSize(new Dimension(250, 50));
 
-        especialidade = new InputField();
-        formatTextField(especialidade);
-        especialidade.setPreferredSize(new Dimension(250, 50));
+        especialidade = new InputField(false);
+        componentsFormat.formatTextField(especialidade, panel);
+        especialidade.setPreferredSize(new Dimension(245, 50));
 
 
         btnEntrar = new Button("Entrar");
@@ -68,8 +72,8 @@ public class RegistroMedico extends JFrame implements ActionListener {
         btnEntrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         btnEntrar.setPreferredSize(new Dimension(250, 60));
         btnEntrar.setLayout(new FlowLayout(FlowLayout.LEFT));
-
         add(btnEntrar);
+
         btnCancelar = new Button("Cancelar");
         btnCancelar.setBackground(new Color(0x2FF001A));
         btnCancelar.setForeground(Color.WHITE);
@@ -85,7 +89,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 1;
-        panel.add(Box.createRigidArea(new Dimension(0, 50)), gbc);
+        panel.add(Box.createRigidArea(new Dimension(0, 60)), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -160,27 +164,14 @@ public class RegistroMedico extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    void formatLabel(JLabel lbl) {
-        lbl.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
-        lbl.setForeground(Color.WHITE);
-        lbl.setLayout(new FlowLayout(FlowLayout.LEFT));
-        lbl.setPreferredSize(new Dimension(500, 50));
-        add(lbl);
-    }
-
-    void formatTextField(JTextField tf) {
-        tf.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        tf.setForeground(Color.BLACK);
-        tf.setPreferredSize(new Dimension(500, 50));
-        add(tf);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnEntrar) {
 
         } else if(e.getSource() == btnCancelar) {
             this.dispose();
+            LoginMedico loginMedico = new LoginMedico(new ArrayList<>());
+            loginMedico.setVisible(true);
         }
     }
 }
