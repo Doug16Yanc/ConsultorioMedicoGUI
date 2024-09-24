@@ -1,6 +1,6 @@
 package entities;
 
-abstract class Paciente {
+public abstract class Paciente {
     private int id;
     private String nome;
     private String email;

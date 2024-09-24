@@ -11,6 +11,7 @@ import java.util.List;
 
 class Consultorio extends JFrame implements ActionListener {
 
+    private JLabel icon;
     private Paciente paciente;
     private List<Consulta> consultas;
 
@@ -18,23 +19,26 @@ class Consultorio extends JFrame implements ActionListener {
         this.paciente = paciente;
         this.consultas = consultas;
 
-        setTitle("Janela do consultório");
+        setTitle("Marcar consulta");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setLocationRelativeTo(null);
 
-        JPanel panel = new BackgroundImagePanel("src/images/medical.png");
+        JPanel panel = new BackgroundImagePanel("src/images/medico.png");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
-        JMenuBar mb = new JMenuBar();
-
-        JMenu opcoes = new JMenu("Opções");
-        opcoes.setForeground(Color.BLUE);
-        opcoes.setFont(new Font("sans serif", Font.BOLD, 20));
-        mb.add(opcoes);
 
 
+        ImageIcon imageIcon = new ImageIcon("src/icons/iconPatient.png");
+        icon = new JLabel(imageIcon);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+        panel.add(icon, gbc);
+
+        /*
         JMenuItem consultaMarcar = new JMenuItem("Marcar consulta : ");
         consultaMarcar.setBackground(new Color(0x63FFF2));
         consultaMarcar.addActionListener(this);
@@ -57,7 +61,7 @@ class Consultorio extends JFrame implements ActionListener {
         opcoes.add(sair);
 
         setJMenuBar(mb);
-        setVisible(true);
+        setVisible(true); */
     }
 
     @Override

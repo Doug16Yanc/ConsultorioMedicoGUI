@@ -1,9 +1,13 @@
 package ui;
 
+import entities.Consulta;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -19,7 +23,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0,0, 0,  0);
 
-        titulo = new JLabel("Registro de Paciente");
+        titulo = new JLabel("Registro de médico");
         titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 25));
         titulo.setPreferredSize(new Dimension(400, 40));
         titulo.setLayout(new FlowLayout(FlowLayout.CENTER));

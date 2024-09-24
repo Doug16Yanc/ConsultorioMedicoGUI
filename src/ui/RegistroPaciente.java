@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
@@ -150,5 +151,10 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         } else if(e.getSource() == btnCancelar) {
             this.dispose();
         }
+    }
+
+    public static void main(String[] args) {
+        List<Consulta> consultas = new ArrayList<>();
+        SwingUtilities.invokeLater(RegistroPaciente::new);
     }
 }
