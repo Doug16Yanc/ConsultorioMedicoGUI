@@ -1,7 +1,8 @@
 package entities;
 
-public class PacienteSUS extends Paciente{
+public class PacienteSUS extends Paciente {
     private int numeroSUS;
+
     public PacienteSUS() {
     }
 

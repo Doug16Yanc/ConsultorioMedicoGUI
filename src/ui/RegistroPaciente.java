@@ -21,7 +21,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(0,0, 0,  0);
+        gbc.insets = new Insets(0, 0, 0, 0);
 
         titulo = new JLabel("Registro de Paciente");
         titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 25));
@@ -34,25 +34,25 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
         lblNomePaciente = new JLabel("Nome");
         formatLabel(lblNomePaciente);
-        nomePaciente = new InputField();
+        nomePaciente = new InputField(false);
         formatTextField(nomePaciente);
         lblEmail = new JLabel("Email");
         formatLabel(lblEmail);
-        emailPaciente = new InputField();
+        emailPaciente = new InputField(false);
         formatTextField(emailPaciente);
         lblTelefonePaciente = new JLabel("Telefone");
         formatLabel(lblTelefonePaciente);
-        telefonePaciente = new InputField();
+        telefonePaciente = new InputField(false);
         formatTextField(telefonePaciente);
         lblSenhaPaciente = new JLabel("Senha");
         formatLabel(lblSenhaPaciente);
-        senhaPaciente = new InputField();
+        senhaPaciente = new InputField(true);
         formatTextField(senhaPaciente);
 
         btnEntrar = new Button("Entrar");
         btnEntrar.setBackground(new Color(0x2773FF));
         btnEntrar.setForeground(Color.WHITE);
-        btnEntrar.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        btnEntrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
         btnEntrar.addActionListener(this);
         btnEntrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         btnEntrar.setPreferredSize(new Dimension(250, 60));
@@ -62,7 +62,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         btnCancelar = new Button("Cancelar");
         btnCancelar.setBackground(new Color(0x2FF001A));
         btnCancelar.setForeground(Color.WHITE);
-        btnCancelar.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        btnCancelar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
         btnCancelar.addActionListener(this);
         btnCancelar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         btnCancelar.setPreferredSize(new Dimension(250, 60));
@@ -146,10 +146,12 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == btnEntrar) {
+        if (e.getSource() == btnEntrar) {
 
-        } else if(e.getSource() == btnCancelar) {
+        } else if (e.getSource() == btnCancelar) {
             this.dispose();
+            LoginPaciente loginPaciente = new LoginPaciente(new ArrayList<>());
+            loginPaciente.setVisible(true);
         }
     }
 
