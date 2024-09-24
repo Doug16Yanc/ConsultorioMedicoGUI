@@ -2,7 +2,6 @@ import javax.swing.*;
 
 import entities.Consulta;
 import ui.Login;
-import ui.LoginPaciente;
 
 import java.util.ArrayList;
 import java.util.List;

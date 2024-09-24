@@ -1,6 +1,10 @@
 package entities;
 
+<<<<<<< HEAD
 public abstract class Paciente {
+=======
+public class Paciente {
+>>>>>>> 26997c0d35ce1458fd5dc3dead345bc2912332a7
     private int id;
     private String nome;
     private String email;
