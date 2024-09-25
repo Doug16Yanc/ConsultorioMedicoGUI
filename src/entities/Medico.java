@@ -1,7 +1,6 @@
 package entities;
 
 public class Medico {
-    private int id;
     private String nome;
     private String CRM;
     private String senha;
@@ -11,22 +10,13 @@ public class Medico {
 
     public Medico() {}
 
-    public Medico(int id, String nome, String CRM, String senha, String email, String telefone, Especialidade especialidade) {
-        this.id = id;
+    public Medico(String nome, String CRM, String senha, String email, String telefone, Especialidade especialidade) {
         this.nome = nome;
         this.CRM = CRM;
         this.senha = senha;
         this.email = email;
         this.telefone = telefone;
         this.especialidade = especialidade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
