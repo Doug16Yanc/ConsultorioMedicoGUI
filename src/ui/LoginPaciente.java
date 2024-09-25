@@ -13,15 +13,10 @@ import java.util.List;
 import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class LoginPaciente extends JFrame implements ActionListener {
-<<<<<<< HEAD
     JButton entrar, cancelar;
     JTextField login, senha;
-=======
-
     private JButton btnEntrar, btnCancelar, btnRegistrar;
     private JLabel sus, convenio, titulo, lblOu;
-    private JTextField login, senha;
->>>>>>> 26997c0d35ce1458fd5dc3dead345bc2912332a7
     private Paciente paciente;
     private List<Consulta> consultas;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
