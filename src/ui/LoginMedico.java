@@ -34,7 +34,7 @@ public class LoginMedico extends JFrame implements ActionListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        titulo = new JLabel("Login Medico");
+        titulo = new JLabel("Login do médico");
         titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 35));
         titulo.setForeground(Color.WHITE);
         titulo.setLayout(new FlowLayout(FlowLayout.CENTER));

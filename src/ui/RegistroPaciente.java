@@ -1,6 +1,7 @@
 package ui;
 
 import entities.Consulta;
+import utilities.ComponentsFormat;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +16,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
     JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblSenhaPaciente;
     JTextField nomePaciente, emailPaciente, telefonePaciente, senhaPaciente;
     JButton btnEntrar, btnCancelar;
+    private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public RegistroPaciente() {
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
@@ -33,21 +35,21 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         add(titulo);
 
         lblNomePaciente = new JLabel("Nome");
-        formatLabel(lblNomePaciente);
+        componentsFormat.formatLabel(lblNomePaciente, panel);
         nomePaciente = new InputField(false);
-        formatTextField(nomePaciente);
+        componentsFormat.formatTextField(nomePaciente, panel);
         lblEmail = new JLabel("Email");
-        formatLabel(lblEmail);
+        componentsFormat.formatLabel(lblEmail, panel);
         emailPaciente = new InputField(false);
-        formatTextField(emailPaciente);
+        componentsFormat.formatTextField(emailPaciente, panel);
         lblTelefonePaciente = new JLabel("Telefone");
-        formatLabel(lblTelefonePaciente);
+        componentsFormat.formatLabel(lblTelefonePaciente, panel);
         telefonePaciente = new InputField(false);
-        formatTextField(telefonePaciente);
+        componentsFormat.formatTextField(telefonePaciente, panel);
         lblSenhaPaciente = new JLabel("Senha");
-        formatLabel(lblSenhaPaciente);
+        componentsFormat.formatLabel(lblSenhaPaciente, panel);
         senhaPaciente = new InputField(true);
-        formatTextField(senhaPaciente);
+        componentsFormat.formatTextField(senhaPaciente, panel);
 
         btnEntrar = new Button("Entrar");
         btnEntrar.setBackground(new Color(0x2773FF));
@@ -127,21 +129,6 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         setSize(1920, 1080);
         setLocation(500, 250);
         setVisible(true);
-    }
-
-    void formatLabel(JLabel lbl) {
-        lbl.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
-        lbl.setForeground(Color.WHITE);
-        lbl.setLayout(new FlowLayout(FlowLayout.LEFT));
-        lbl.setPreferredSize(new Dimension(500, 50));
-        add(lbl);
-    }
-
-    void formatTextField(JTextField tf) {
-        tf.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        tf.setForeground(Color.BLACK);
-        tf.setPreferredSize(new Dimension(500, 50));
-        add(tf);
     }
 
     @Override

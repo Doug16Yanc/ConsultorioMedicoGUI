@@ -4,6 +4,7 @@ import entities.Consulta;
 import entities.Especialidade;
 import entities.Medico;
 import entities.Paciente;
+import utilities.ComponentsFormat;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,67 +15,112 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Acoes extends JFrame implements ActionListener {
+import static utilities.Fonts.JET_BRAINS_MONO;
+
+public class MarcaConsulta extends JFrame implements ActionListener {
 
     private ArrayList<Medico> medicos;
     private JComboBox<String> medicoComboBox;
     private JTextArea outputArea;
     private JTextField motivoField;
+    private JButton marcarConsulta, sairButton;
     private final Paciente paciente;
     private final List<Consulta> consultas;
+    private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
-    public Acoes(Paciente paciente, List<Consulta> consultas) {
+
+    public MarcaConsulta(Paciente paciente, List<Consulta> consultas) {
         this.paciente = paciente;
         this.consultas = consultas;
 
-        setTitle("Consultório");
+        setTitle("Marcar consulta");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 400);
+        setSize(800, 600);
         setLocationRelativeTo(null);
 
-        JButton marcarConsulta = new JButton("Marcar Consulta : ");
-        marcarConsulta.setBackground(new Color(0x63FFF2));
+        marcarConsulta = new Button("Marcar");
+        marcarConsulta.setBackground(new Color(0x10C100));
         marcarConsulta.addActionListener(this);
+        marcarConsulta.setForeground(Color.WHITE);
+        marcarConsulta.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        marcarConsulta.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        add(marcarConsulta);
         marcarConsulta.setActionCommand("Marcar Consulta : ");
 
         medicos = inicializaMedicos();
 
         JLabel medicoLabel = new JLabel("Selecione o médico:");
+        componentsFormat.formatLabel(medicoLabel, new JPanel());
+        medicoLabel.setForeground(Color.BLACK);
+
         medicoComboBox = new JComboBox<>();
+        medicoComboBox.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 17));
         for (Medico medico : medicos) {
-            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade() + " - " + medico.getCRM());
+            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade().getNomeEspecialidade() + " - " + medico.getCRM());
         }
 
         JLabel motivoLabel = new JLabel("Motivo da consulta:");
-        motivoField = new JTextField(20);
+        componentsFormat.formatLabel(motivoLabel, new JPanel());
+        motivoLabel.setForeground(Color.BLACK);
+        motivoField = new InputField(false);
+        componentsFormat.formatTextField(motivoField, new JPanel());
 
-        JButton sairButton = new JButton("Sair");
-        sairButton.setBackground(new Color(0xFF6347));
-        sairButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        JPanel motivoPanel = new JPanel();
+        motivoPanel.setLayout(new BorderLayout());
+        motivoPanel.add(motivoLabel, BorderLayout.NORTH);
+        motivoPanel.add(motivoField, BorderLayout.CENTER);
+
+        sairButton = new Button("Voltar");
+        sairButton.setBackground(new Color(0xFF001A));
+
+        sairButton.setForeground(Color.WHITE);
+        sairButton.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        sairButton.addActionListener(this);
+        sairButton.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        add(sairButton);
+        sairButton.addActionListener(e -> dispose());
 
         outputArea = new JTextArea();
         outputArea.setEditable(false);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 2));
-        panel.add(medicoLabel);
-        panel.add(medicoComboBox);
-        panel.add(motivoLabel);
-        panel.add(motivoField);
-        panel.add(marcarConsulta);
-        panel.add(sairButton);
+        JPanel camposPanel = new JPanel();
+        camposPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        add(panel, BorderLayout.NORTH);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        camposPanel.add(medicoLabel, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        camposPanel.add(medicoComboBox, gbc);
+
+        gbc.gridy = 0;
+        gbc.weighty = 1.0;
+        camposPanel.add(Box.createVerticalStrut(10), gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.weighty = 0;
+        camposPanel.add(motivoPanel, gbc);
+
+        JPanel botoesPanel = new JPanel();
+        botoesPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+        botoesPanel.add(marcarConsulta);
+        botoesPanel.add(sairButton);
+
+        setLayout(new BorderLayout());
+        add(camposPanel, BorderLayout.NORTH);
         add(new JScrollPane(outputArea), BorderLayout.CENTER);
+        add(botoesPanel, BorderLayout.SOUTH);
 
         setVisible(true);
-
     }
+
 
     public ArrayList<Medico> inicializaMedicos() {
         ArrayList<Medico> medicos = new ArrayList<>();

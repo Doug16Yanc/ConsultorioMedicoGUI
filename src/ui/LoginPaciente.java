@@ -93,7 +93,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 10;
-        panel.add(Box.createRigidArea(new Dimension(0, 60)), gbc);
+        panel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         btnEntrar = new Button("Entrar");
@@ -157,7 +157,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
             this.dispose();
             Login login = new Login(consultas);
             login.setVisible(true);
-        } else if (e.getSource() == btnCancelar) {
+        } else if (e.getSource() == btnEntrar) {
             this.dispose();
             MenuPaciente menuPaciente = new MenuPaciente(consultas);
             menuPaciente.setVisible(true);
