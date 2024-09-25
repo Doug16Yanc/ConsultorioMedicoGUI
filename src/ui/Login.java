@@ -30,7 +30,7 @@ public class Login extends JFrame implements ActionListener {
         gbc.insets = new Insets(10, 10, 10, 10);
 
         boasVindas = new JLabel("Seja bem vindo(a) ao nosso sistema!");
-        boasVindas.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 40));
+        boasVindas.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 35));
         boasVindas.setForeground(Color.WHITE);
         add(boasVindas);
 
