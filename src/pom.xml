@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>src</groupId>
-  <artifactId>Consultorio Medico GUI</artifactId>
+  <artifactId>ConsultorioMedicoGUI</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
@@ -16,7 +16,7 @@
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.39</version>
+      <version>8.0.33</version>
     </dependency>
   </dependencies>
 </project>

@@ -1,11 +1,9 @@
 package ui;
 
-import entities.Especialidade;
 import entities.Medico;
 import repository.MedicoRepository;
 import utilities.ComponentsFormat;
 
-import javax.persistence.EntityManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -178,15 +176,19 @@ public class RegistroMedico extends JFrame implements ActionListener {
             String CRM = crm.getText();
             String especialidadeNome = especialidade.getText();
 
-            Medico medico = new Medico(new Random().nextInt(),nome, CRM, senha, email, telefone, new Especialidade(especialidadeNome));
+            Medico medico = new Medico(new Random().nextInt(),nome, CRM, senha, email, telefone, especialidadeNome);
 
             try {
                 MedicoRepository medicoRepository = new MedicoRepository();
                 medicoRepository.cadastrarMedico(medico);
                 JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
+                this.dispose();
+                MenuMedico menuMedico = new MenuMedico(new ArrayList<>());
+                menuMedico.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar médico: " + ex.getMessage());
             }
+
         }else if(e.getSource() == btnCancelar) {
             this.dispose();
             LoginMedico loginMedico = new LoginMedico(new ArrayList<>());

@@ -5,19 +5,17 @@ public class Paciente {
     private String nome;
     private String email;
     private String telefone;
-    private String login;
     private String senha;
 
     public Paciente() {
 
     }
 
-    public Paciente(int id, String nome, String email, String telefone, String login, String senha) {
+    public Paciente(int id, String nome, String email, String telefone, String senha) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-        this.login = login;
         this.senha = senha;
 
     }
@@ -52,14 +50,6 @@ public class Paciente {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getSenha() {

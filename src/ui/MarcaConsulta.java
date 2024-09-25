@@ -1,7 +1,6 @@
 package ui;
 
 import entities.Consulta;
-import entities.Especialidade;
 import entities.Medico;
 import entities.Paciente;
 import utilities.ComponentsFormat;
@@ -56,7 +55,7 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         medicoComboBox = new JComboBox<>();
         medicoComboBox.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 17));
         for (Medico medico : medicos) {
-            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade().getNomeEspecialidade() + " - " + medico.getCRM());
+            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade() + " - " + medico.getCRM());
         }
 
         JLabel motivoLabel = new JLabel("Motivo da consulta:");
@@ -124,11 +123,11 @@ public class MarcaConsulta extends JFrame implements ActionListener {
 
     public ArrayList<Medico> inicializaMedicos() {
         ArrayList<Medico> medicos = new ArrayList<>();
-        medicos.add(new Medico(123, "Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", new Especialidade("Clínica geral")));
-        medicos.add(new Medico(987, "Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678", new Especialidade("Ortopedista")));
-        medicos.add(new Medico(456, "Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", new Especialidade("Psiquiatra")));
-        medicos.add(new Medico(189, "Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", new Especialidade("Cardiologista")));
-        medicos.add(new Medico(834, "Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", new Especialidade("Hematologista")));
+        medicos.add(new Medico(123, "Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", "Clínica geral"));
+        medicos.add(new Medico(987, "Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678","Ortopedista"));
+        medicos.add(new Medico(456, "Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", "Psiquiatra"));
+        medicos.add(new Medico(189, "Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", "Cardiologista"));
+        medicos.add(new Medico(834, "Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", "Hematologista"));
 
         return medicos;
     }

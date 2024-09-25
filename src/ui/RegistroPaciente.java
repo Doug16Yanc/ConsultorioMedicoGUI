@@ -1,6 +1,7 @@
 package ui;
 
-import entities.Consulta;
+import entities.Paciente;
+import repository.PacienteRepository;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -134,6 +135,24 @@ public class RegistroPaciente extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnEntrar) {
+
+            String nome = nomePaciente.getText();
+            String email = emailPaciente.getText();
+            String telefone = telefonePaciente.getText();
+            String senha = senhaPaciente.getText();
+
+            Paciente paciente = new Paciente(new Random().nextInt(), nome, senha, email, telefone);
+
+            try {
+                PacienteRepository pacienteRepository = new PacienteRepository();
+                pacienteRepository.cadastrarPaciente(paciente);
+                JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
+                this.dispose();
+                MenuPaciente menuPaciente = new MenuPaciente(new ArrayList<>());
+                menuPaciente.setVisible(true);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente: " + ex.getMessage());
+            }
 
         } else if (e.getSource() == btnCancelar) {
             this.dispose();
