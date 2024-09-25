@@ -48,10 +48,11 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         JLabel medicoLabel = new JLabel("Selecione o médico:");
         medicoComboBox = new JComboBox<>();
         for (Medico medico : medicos) {
-            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade() + " - " + medico.getCRM());
+            medicoComboBox.addItem(medico.getNome() + " - " + medico.getEspecialidade().getNomeEspecialidade() + " - " + medico.getCRM());
         }
 
         JLabel motivoLabel = new JLabel("Motivo da consulta:");
+        motivoLabel.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         motivoField = new JTextField(20);
 
         JPanel motivoPanel = new JPanel();
@@ -109,11 +110,11 @@ public class MarcaConsulta extends JFrame implements ActionListener {
 
     public ArrayList<Medico> inicializaMedicos() {
         ArrayList<Medico> medicos = new ArrayList<>();
-        medicos.add(new Medico(123, "Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", new Especialidade("Clínica geral")));
-        medicos.add(new Medico(987, "Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678", new Especialidade("Ortopedista")));
-        medicos.add(new Medico(456, "Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", new Especialidade("Psiquiatra")));
-        medicos.add(new Medico(189, "Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", new Especialidade("Cardiologista")));
-        medicos.add(new Medico(834, "Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", new Especialidade("Hematologista")));
+        medicos.add(new Medico("Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", new Especialidade("Clínica geral")));
+        medicos.add(new Medico("Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678", new Especialidade("Ortopedista")));
+        medicos.add(new Medico("Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", new Especialidade("Psiquiatra")));
+        medicos.add(new Medico("Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", new Especialidade("Cardiologista")));
+        medicos.add(new Medico("Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", new Especialidade("Hematologista")));
 
         return medicos;
     }
@@ -153,7 +154,6 @@ public class MarcaConsulta extends JFrame implements ActionListener {
                 "Identificador do(a) paciente : " + paciente.getId() + "\n" +
                 "Nome do(a) paciente : " + paciente.getNome() + "\n" +
                 "Paciente relata : " + consulta.getMotivo() + "\n" +
-                "Identificador do(a) médico(a) : " + medico.getId() + "\n" +
                 "Nome do(a) médico(a) : " + medico.getNome();
         outputArea.setText(message);
         outputArea.setFont(new Font("Tahoma", Font.PLAIN, 20));

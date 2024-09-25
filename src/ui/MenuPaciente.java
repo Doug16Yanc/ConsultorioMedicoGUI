@@ -48,7 +48,7 @@ public class MenuPaciente extends JFrame implements ActionListener {
         gbc.gridy = 1;
         panel.add(marcarConsulta, gbc);
 
-        verConsultas = new JButton("Ver minhas consultas");
+        verConsultas = new JButton("Averiguar consultas");
         verConsultas.setBackground(new Color(0x2773FF));
         verConsultas.setForeground(Color.WHITE);
         verConsultas.setBorder(BorderFactory.createEmptyBorder(15, 90, 15, 90));
