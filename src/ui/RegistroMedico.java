@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -177,7 +178,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
             String CRM = crm.getText();
             String especialidadeNome = especialidade.getText();
 
-            Medico medico = new Medico(nome, CRM, senha, email, telefone, new Especialidade(especialidadeNome));
+            Medico medico = new Medico(new Random().nextInt(),nome, CRM, senha, email, telefone, new Especialidade(especialidadeNome));
 
             try {
                 MedicoRepository medicoRepository = new MedicoRepository();
