@@ -136,7 +136,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setFocusPainted(false);
-        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 17));
+        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         btnRegistrar.setForeground(Color.WHITE);
         btnRegistrar.setPreferredSize(new Dimension(160, 60));
         btnRegistrar.addActionListener(this);
@@ -163,8 +163,8 @@ public class LoginPaciente extends JFrame implements ActionListener {
             menuPaciente.setVisible(true);
         } else if (e.getSource() == btnRegistrar) {
             this.dispose();
-            RegistroPaciente registroPaciente = new RegistroPaciente();
-            registroPaciente.setVisible(true);
+            EscolhaPaciente escolhaPaciente = new EscolhaPaciente(consultas);
+            escolhaPaciente.setVisible(true);
         }
     }
 }

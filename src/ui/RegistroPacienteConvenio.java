@@ -13,20 +13,20 @@ import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
-public class RegistroPaciente extends JFrame implements ActionListener {
-    JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblSenhaPaciente;
-    JTextField nomePaciente, emailPaciente, telefonePaciente, senhaPaciente;
+public class RegistroPacienteConvenio extends JFrame implements ActionListener {
+    JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblConvenio, lblSenhaPaciente;
+    JTextField nomePaciente, emailPaciente, telefonePaciente, convenioPaciente, senhaPaciente;
     JButton btnEntrar, btnCancelar;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
-    public RegistroPaciente() {
+    public RegistroPacienteConvenio() {
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        titulo = new JLabel("Registro de Paciente");
+        titulo = new JLabel("Registro de Paciente de Convênio");
         titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 25));
         titulo.setPreferredSize(new Dimension(400, 40));
         titulo.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -47,6 +47,10 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         componentsFormat.formatLabel(lblTelefonePaciente, panel);
         telefonePaciente = new InputField(false);
         componentsFormat.formatTextField(telefonePaciente, panel);
+        lblConvenio = new JLabel("Convênio");
+        componentsFormat.formatLabel(lblConvenio, panel);
+        convenioPaciente = new InputField(false);
+        componentsFormat.formatTextField(convenioPaciente, panel);
         lblSenhaPaciente = new JLabel("Senha");
         componentsFormat.formatLabel(lblSenhaPaciente, panel);
         senhaPaciente = new InputField(true);
@@ -105,14 +109,22 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 8;
-        panel.add(lblSenhaPaciente, gbc);
+        panel.add(lblConvenio, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 9;
-        panel.add(senhaPaciente, gbc);
+        panel.add(convenioPaciente, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 10;
+        panel.add(lblSenhaPaciente, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 11;
+        panel.add(senhaPaciente, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 12;
         panel.add(Box.createRigidArea(new Dimension(0, 20)), gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -121,7 +133,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         buttonPanel.add(btnCancelar);
 
         gbc.gridx = 0;
-        gbc.gridy = 11;
+        gbc.gridy = 13;
         gbc.gridwidth = 2;
         panel.add(buttonPanel, gbc);
 

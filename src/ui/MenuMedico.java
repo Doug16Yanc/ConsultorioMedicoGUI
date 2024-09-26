@@ -1,6 +1,7 @@
 package ui;
 
 import entities.Consulta;
+import entities.Paciente;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +15,7 @@ import static utilities.Fonts.JET_BRAINS_MONO;
 public class MenuMedico extends JFrame implements ActionListener {
     private JButton verConsultorio, verConsultas, btnSair;
     private JLabel icon;
+    private Paciente paciente;
     private List<Consulta> consultas;
 
     public MenuMedico(List<Consulta> consultas) {
@@ -87,8 +89,11 @@ public class MenuMedico extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == verConsultorio) {
-
+            ConsultorioMedico consultorioMedico = new ConsultorioMedico(paciente, consultas);
+            consultorioMedico.setVisible(true);
         } else if (e.getSource() == verConsultas) {
+            VerConsultas verConsultas = new VerConsultas(paciente, consultas);
+            verConsultas.setVisible(true);
 
         } else if (e.getSource() == btnSair) {
             this.dispose();
