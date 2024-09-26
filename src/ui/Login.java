@@ -95,9 +95,7 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == medicoBotao) {
             LoginMedico loginMedico = new LoginMedico(consultas);
-//            RegistroMedico registroMedico = new RegistroMedico();
             loginMedico.setVisible(true);
-//            registroMedico.setVisible(true);
             this.dispose();
         } else if (e.getSource() == pacienteBotao) {
             LoginPaciente loginPaciente = new LoginPaciente(consultas);
