@@ -1,13 +1,15 @@
 package ui;
 
-import entities.Consulta;
+import entities.Paciente;
+import repository.PacienteRepository;
+import utilities.ComponentsFormat;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -15,6 +17,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
     JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblSenhaPaciente;
     JTextField nomePaciente, emailPaciente, telefonePaciente, senhaPaciente;
     JButton btnEntrar, btnCancelar;
+    private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public RegistroPaciente() {
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
@@ -33,21 +36,21 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         add(titulo);
 
         lblNomePaciente = new JLabel("Nome");
-        formatLabel(lblNomePaciente);
+        componentsFormat.formatLabel(lblNomePaciente, panel);
         nomePaciente = new InputField(false);
-        formatTextField(nomePaciente);
+        componentsFormat.formatTextField(nomePaciente, panel);
         lblEmail = new JLabel("Email");
-        formatLabel(lblEmail);
+        componentsFormat.formatLabel(lblEmail, panel);
         emailPaciente = new InputField(false);
-        formatTextField(emailPaciente);
+        componentsFormat.formatTextField(emailPaciente, panel);
         lblTelefonePaciente = new JLabel("Telefone");
-        formatLabel(lblTelefonePaciente);
+        componentsFormat.formatLabel(lblTelefonePaciente, panel);
         telefonePaciente = new InputField(false);
-        formatTextField(telefonePaciente);
+        componentsFormat.formatTextField(telefonePaciente, panel);
         lblSenhaPaciente = new JLabel("Senha");
-        formatLabel(lblSenhaPaciente);
+        componentsFormat.formatLabel(lblSenhaPaciente, panel);
         senhaPaciente = new InputField(true);
-        formatTextField(senhaPaciente);
+        componentsFormat.formatTextField(senhaPaciente, panel);
 
         btnEntrar = new Button("Entrar");
         btnEntrar.setBackground(new Color(0x2773FF));
@@ -129,24 +132,27 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    void formatLabel(JLabel lbl) {
-        lbl.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
-        lbl.setForeground(Color.WHITE);
-        lbl.setLayout(new FlowLayout(FlowLayout.LEFT));
-        lbl.setPreferredSize(new Dimension(500, 50));
-        add(lbl);
-    }
-
-    void formatTextField(JTextField tf) {
-        tf.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        tf.setForeground(Color.BLACK);
-        tf.setPreferredSize(new Dimension(500, 50));
-        add(tf);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnEntrar) {
+
+            String nome = nomePaciente.getText();
+            String email = emailPaciente.getText();
+            String telefone = telefonePaciente.getText();
+            String senha = senhaPaciente.getText();
+
+            Paciente paciente = new Paciente(new Random().nextInt(), nome, senha, email, telefone);
+
+            try {
+                PacienteRepository pacienteRepository = new PacienteRepository();
+                pacienteRepository.cadastrarPaciente(paciente);
+                JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
+                this.dispose();
+                MenuPaciente menuPaciente = new MenuPaciente(new ArrayList<>());
+                menuPaciente.setVisible(true);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente: " + ex.getMessage());
+            }
 
         } else if (e.getSource() == btnCancelar) {
             this.dispose();

@@ -29,17 +29,15 @@ public class Login extends JFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
 
-        setVisible(true);
-
-        sou = new JLabel("Eu sou");
-        sou.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        sou.setForeground(Color.WHITE);
-        add(sou);
-
         boasVindas = new JLabel("Seja bem vindo(a) ao nosso sistema!");
-        boasVindas.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        boasVindas.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 35));
         boasVindas.setForeground(Color.WHITE);
         add(boasVindas);
+
+        sou = new JLabel("Eu sou...");
+        sou.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 35));
+        sou.setForeground(Color.WHITE);
+        add(sou);
 
         medicoBotao = new Button("Médico");
         medicoBotao.setBackground(new Color(0x2773FF));
@@ -97,9 +95,7 @@ public class Login extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == medicoBotao) {
             LoginMedico loginMedico = new LoginMedico(consultas);
-//            RegistroMedico registroMedico = new RegistroMedico();
             loginMedico.setVisible(true);
-//            registroMedico.setVisible(true);
             this.dispose();
         } else if (e.getSource() == pacienteBotao) {
             LoginPaciente loginPaciente = new LoginPaciente(consultas);

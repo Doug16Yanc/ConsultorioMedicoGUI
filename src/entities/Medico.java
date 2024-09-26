@@ -7,11 +7,11 @@ public class Medico {
     private String senha;
     private String email;
     private String telefone;
-    private Especialidade especialidade;
+    private String especialidade;
 
     public Medico() {}
 
-    public Medico(int id, String nome, String CRM, String senha, String email, String telefone, Especialidade especialidade) {
+    public Medico(int id, String nome, String CRM, String senha, String email, String telefone, String especialidade) {
         this.id = id;
         this.nome = nome;
         this.CRM = CRM;
@@ -69,11 +69,11 @@ public class Medico {
         this.telefone = telefone;
     }
 
-    public Especialidade getEspecialidade() {
+    public String getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(Especialidade especialidade) {
+    public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
 }

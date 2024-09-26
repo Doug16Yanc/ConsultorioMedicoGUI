@@ -1,5 +1,7 @@
 package ui;
 
+import entities.Medico;
+import repository.MedicoRepository;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -7,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -50,7 +53,6 @@ public class RegistroMedico extends JFrame implements ActionListener {
         lblCrm = new JLabel("CRM");
         componentsFormat.formatLabel(lblCrm, panel);
         lblCrm.setPreferredSize(new Dimension(250, 50));
-
         crm = new InputField(false);
         componentsFormat.formatTextField(crm, panel);
         crm.setPreferredSize(new Dimension(245, 50));
@@ -166,9 +168,28 @@ public class RegistroMedico extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == btnEntrar) {
+        if (e.getSource() == btnEntrar) {
+            String nome = nomeMedico.getText();
+            String email = emailMedico.getText();
+            String telefone = telefoneMedico.getText();
+            String senha = senhaMedico.getText();
+            String CRM = crm.getText();
+            String especialidadeNome = especialidade.getText();
 
-        } else if(e.getSource() == btnCancelar) {
+            Medico medico = new Medico(new Random().nextInt(),nome, CRM, senha, email, telefone, especialidadeNome);
+
+            try {
+                MedicoRepository medicoRepository = new MedicoRepository();
+                medicoRepository.cadastrarMedico(medico);
+                JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
+                this.dispose();
+                MenuMedico menuMedico = new MenuMedico(new ArrayList<>());
+                menuMedico.setVisible(true);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar médico: " + ex.getMessage());
+            }
+
+        }else if(e.getSource() == btnCancelar) {
             this.dispose();
             LoginMedico loginMedico = new LoginMedico(new ArrayList<>());
             loginMedico.setVisible(true);
