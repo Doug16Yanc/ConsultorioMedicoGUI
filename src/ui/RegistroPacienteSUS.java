@@ -56,7 +56,7 @@ public class RegistroPacienteSUS extends JFrame implements ActionListener {
         senhaPaciente = new InputField(true);
         componentsFormat.formatTextField(senhaPaciente, panel);
 
-        btnEntrar = new Button("Entrar");
+        btnEntrar = new Button("Registrar");
         btnEntrar.setBackground(new Color(0x2773FF));
         btnEntrar.setForeground(Color.WHITE);
         btnEntrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
@@ -152,8 +152,9 @@ public class RegistroPacienteSUS extends JFrame implements ActionListener {
             String email = emailPaciente.getText();
             String telefone = telefonePaciente.getText();
             String senha = senhaPaciente.getText();
+            int codigo = Integer.parseInt(susPaciente.getText());
 
-            Paciente paciente = new Paciente(nome, email, telefone, senha);
+            Paciente paciente = new Paciente(nome, email, telefone, senha, codigo);
 
             try {
                 PacienteRepository pacienteRepository = new PacienteRepository();

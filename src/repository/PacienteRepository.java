@@ -14,19 +14,45 @@ import java.util.UUID;
 public class PacienteRepository {
 
     public void cadastrarPaciente(Paciente paciente) throws SQLException {
-        String sql = "INSERT INTO paciente (NOME, EMAIL, TELEFONE, SENHA) VALUES (?, ?, ?, ?)";
+
+        if (pacienteExiste(paciente.getEmail())) {
+            System.out.println("Paciente já cadastrado com o email fornecido.");
+            return;
+        }
+
+        String sql = "INSERT INTO paciente (NOME, EMAIL, TELEFONE, SENHA, CODIGO) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
             stmt.setString(1, paciente.getNome());
             stmt.setString(2, paciente.getEmail());
             stmt.setString(3, paciente.getTelefone());
             stmt.setString(4, paciente.getSenha());
+            stmt.setInt(5, paciente.getCodigo());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erro ao cadastrar paciente: " + e.getMessage());
             throw new SQLException(e.getMessage());
         }
     }
+
+    public boolean pacienteExiste(String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM paciente WHERE EMAIL = ?";
+
+        try (PreparedStatement stmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao verificar se o paciente já existe: " + e.getMessage());
+            throw new SQLException("Erro ao verificar paciente no banco de dados.", e);
+        }
+
+        return false;
+    }
+
 
     public Paciente buscarPaciente(String email, String senha) throws SQLException {
         String sql = "SELECT * FROM paciente WHERE EMAIL = ? AND SENHA = ?";
@@ -43,6 +69,7 @@ public class PacienteRepository {
                 paciente.setEmail(rs.getString("email"));
                 paciente.setTelefone(rs.getString("telefone"));
                 paciente.setSenha(rs.getString("senha"));
+                paciente.setCodigo(rs.getInt("codigo"));
                 return paciente;
             } else {
                 return null;

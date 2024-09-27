@@ -6,8 +6,8 @@ public class PacienteConvenio extends Paciente {
     public PacienteConvenio() {
     }
 
-    public PacienteConvenio(int id, String nome, String email, String telefone, String senha, int codigoConvenio) {
-        super(nome, email, telefone, senha);
+    public PacienteConvenio(int id, String nome, String email, String telefone, String senha, int codigo, int codigoConvenio) {
+        super(nome, email, telefone, senha, codigo);
         this.codigoConvenio = codigoConvenio;
     }
 

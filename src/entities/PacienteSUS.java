@@ -6,8 +6,8 @@ public class PacienteSUS extends Paciente {
     public PacienteSUS() {
     }
 
-    public PacienteSUS(int id, String nome, String email, String telefone, String senha, int numeroSUS) {
-        super(nome, email, telefone, senha);
+    public PacienteSUS(int id, String nome, String email, String telefone, String senha, int codigo, int numeroSUS) {
+        super(nome, email, telefone, senha, codigo);
         this.numeroSUS = numeroSUS;
     }
 

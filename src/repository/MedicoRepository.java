@@ -14,6 +14,11 @@ import java.util.UUID;
 public class MedicoRepository {
 
     public void cadastrarMedico(Medico medico) throws SQLException {
+        if (medicoExiste(medico.getCRM(), medico.getEmail())) {
+            System.out.println("Médico já cadastrado com o CRM ou email fornecido.");
+            return;
+        }
+
         String sql = "INSERT INTO medico (NOME, CRM, SENHA, EMAIL, TELEFONE, ESPECIALIDADE) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement stmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
@@ -24,11 +29,32 @@ public class MedicoRepository {
             stmt.setString(5, medico.getTelefone());
             stmt.setString(6, medico.getEspecialidade());
             stmt.executeUpdate();
+            System.out.println("Médico cadastrado com sucesso!");
         } catch (SQLException e) {
             System.err.println("Erro ao cadastrar médico: " + e.getMessage());
             throw new SQLException("Erro ao tentar cadastrar médico no banco de dados.", e);
         }
     }
+
+    public boolean medicoExiste(String crm, String email) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM medico WHERE CRM = ? OR EMAIL = ?";
+
+        try (PreparedStatement stmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
+            stmt.setString(1, crm);
+            stmt.setString(2, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Erro ao verificar se o médico já existe: " + e.getMessage());
+            throw new SQLException("Erro ao verificar médico no banco de dados.", e);
+        }
+
+        return false;
+    }
+
 
     public Medico buscarMedico(String crm, String senha) throws SQLException {
         String sql = "SELECT * FROM medico WHERE CRM = ? AND SENHA = ?";
