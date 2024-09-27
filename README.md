@@ -136,10 +136,10 @@ CREATE TABLE paciente (
 CREATE TABLE medico (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    CRM VARCHAR(50) UNIQUE NOT NULL,
-    senha VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     telefone VARCHAR(20) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    CRM VARCHAR(50) UNIQUE NOT NULL,
     especialidade VARCHAR(255) NOT NULL
 );
 ```
@@ -160,7 +160,7 @@ CREATE TABLE consulta (
 
 <h2 align="center"> Requisitos </h2>
 
-* **Java 21 ou superior**
+* **Java 22 ou superior**
 * **MySQL 9.0.1 ou superior**
 * **IDE compatível com Java (Eclipse, IntelliJ, VS Code, NetBeans, etc.)**
 

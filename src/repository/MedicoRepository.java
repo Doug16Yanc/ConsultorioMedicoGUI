@@ -19,10 +19,10 @@ public class MedicoRepository {
 
             try (PreparedStatement stmt = DatabaseConnection.getConnection().prepareStatement(sql)) {
                 stmt.setString(1, medico.getNome());
-                stmt.setString(4, medico.getEmail());
-                stmt.setString(5, medico.getTelefone());
-                stmt.setString(3, medico.getSenha());
-                stmt.setString(2, medico.getCRM());
+                stmt.setString(2, medico.getEmail());
+                stmt.setString(3, medico.getTelefone());
+                stmt.setString(4, medico.getSenha());
+                stmt.setString(5, medico.getCRM());
                 stmt.setString(6, medico.getEspecialidade());
                 stmt.executeUpdate();
                 System.out.println("Médico cadastrado com sucesso!");
