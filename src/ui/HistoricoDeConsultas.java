@@ -38,7 +38,7 @@ public class HistoricoDeConsultas extends JFrame {
             }
 
             JTextArea textArea = new JTextArea(sb.toString());
-            textArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 12));
+            textArea.setFont(new Font("JetBrains Mono", Font.BOLD, 20));
             textArea.setEditable(false);
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);

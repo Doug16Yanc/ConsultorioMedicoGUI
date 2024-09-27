@@ -176,7 +176,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
             String CRM = crm.getText();
             String especialidadeNome = especialidade.getText();
 
-            Medico medico = new Medico(nome, CRM, senha, email, telefone, especialidadeNome);
+            Medico medico = new Medico(nome, email, telefone, senha, CRM, especialidadeNome);
 
             try {
                 MedicoRepository medicoRepository = new MedicoRepository();

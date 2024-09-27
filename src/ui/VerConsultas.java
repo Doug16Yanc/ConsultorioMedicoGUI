@@ -38,7 +38,7 @@ public class VerConsultas extends JFrame {
             }
 
             JTextArea textArea = new JTextArea(sb.toString());
-            textArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 12));
+            textArea.setFont(new Font("JetBrains Mono", Font.BOLD, 20));
             textArea.setEditable(false);
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);
@@ -63,7 +63,7 @@ public class VerConsultas extends JFrame {
                 "Motivo da consulta: " + consulta.getMotivo() + "\n" +
                 "Data e hora da consulta: " + consulta.getAgora() + "\n" +
                 "Médico responsável: " + (medico != null ? medico.getNome() : "Não disponível") + "\n" +
-                "Status: " + (consulta.getStatus() ? "Concluída" : "Pedente") + "\n" +
+                "Status: " + (consulta.getStatus() ? "Concluída" : "Pendente") + "\n" +
                 "----------------------------------------------------------------------";
     }
 }

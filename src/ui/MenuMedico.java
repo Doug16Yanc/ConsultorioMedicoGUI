@@ -102,7 +102,7 @@ public class MenuMedico extends JFrame implements ActionListener {
                     <h1 style='font-size: 20px; margin: 0;'>Bem-vindo, <b>""" + medico.getNome() + """
                     </b>!</h1>
                     <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo de volta.</p>
-                    <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e conlcua outras pedentes!</p>
+                    <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e conlcua outras pendentes!</p>
                 </div>
             </body>
         </html>

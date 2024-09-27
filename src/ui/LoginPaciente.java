@@ -15,12 +15,10 @@ import java.util.List;
 import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class LoginPaciente extends JFrame implements ActionListener {
-    JButton entrar, cancelar;
     JTextField login, senha;
     private JButton btnEntrar, btnCancelar, btnRegistrar;
     private JLabel sus, convenio, titulo, lblOu;
-    private Paciente paciente;
-    private List<Consulta> consultas;
+
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public LoginPaciente() {
@@ -138,7 +136,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setFocusPainted(false);
-        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 17));
+        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 18));
         btnRegistrar.setForeground(Color.WHITE);
         btnRegistrar.setPreferredSize(new Dimension(160, 60));
         btnRegistrar.addActionListener(this);
@@ -183,8 +181,8 @@ public class LoginPaciente extends JFrame implements ActionListener {
 
         } else if (e.getSource() == btnRegistrar) {
             this.dispose();
-            EscolhaPaciente escolhaPaciente = new EscolhaPaciente(consultas);
-            escolhaPaciente.setVisible(true);
+            RegistroPaciente registroPaciente = new RegistroPaciente();
+            registroPaciente.setVisible(true);
         }
     }
 }

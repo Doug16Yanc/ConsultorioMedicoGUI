@@ -19,8 +19,6 @@ public class LoginMedico extends JFrame implements ActionListener {
     private JButton btnEntrar, btnCancelar, btnRegistrar;
     private JLabel boasVindas, aviso, titulo, lblOu;
     private JTextField crm, senha;
-    private Paciente paciente;
-    private List<Consulta> consultas;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public LoginMedico() {
@@ -136,7 +134,7 @@ public class LoginMedico extends JFrame implements ActionListener {
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setFocusPainted(false);
-        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 17));
+        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 18));
         btnRegistrar.setForeground(Color.WHITE);
         btnRegistrar.setPreferredSize(new Dimension(160, 60));
         btnRegistrar.addActionListener(this);

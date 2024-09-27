@@ -12,11 +12,11 @@ public class PopularMedicos {
         MedicoRepository medicoRepository = new MedicoRepository();
 
         List<Medico> medicos = List.of(
-            new Medico("Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", "Clínica geral"),
-            new Medico("Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678", "Ortopedista"),
-            new Medico("Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", "Psiquiatra"),
-            new Medico("Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", "Cardiologista"),
-            new Medico("Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", "Hematologista")
+            new Medico("Dra. Denise Yanasse", "denise@clinica.com", "(85)93939394", "senhaDenise123", "9876543214-98", "Clínica geral"),
+            new Medico("Dr. Douglas Calderoni", "douglas@ortopedia.com", "(21) 91234-5678", "senhaDouglas987", "987654321-78", "Ortopedista"),
+            new Medico("Dr. Alceu Scanavini", "alceu@psiquiatra.com", "(31) 99876-5432", "senhaAlceu456", "876544321-12" , "Psiquiatra"),
+            new Medico("Dra. Laura Arantes", "laura@cardio.com" , "(41) 92345-6789","senhaLaura189" , "998765432-89", "Cardiologista"),
+            new Medico("Dr. Thales Dalessandro","thales@hemato.com","(51) 98765-4321" ,  "senhaThales834","912345678-45", "Hematologista")
         );
 
         for (Medico medico : medicos) {

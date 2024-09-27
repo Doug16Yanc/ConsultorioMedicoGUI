@@ -8,24 +8,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
-public class RegistroPacienteConvenio extends JFrame implements ActionListener {
-    JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblConvenio, lblSenhaPaciente;
-    JTextField nomePaciente, emailPaciente, telefonePaciente, convenioPaciente, senhaPaciente;
+public class RegistroPaciente extends JFrame implements ActionListener {
+    JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblCodigo, lblSenhaPaciente;
+    JTextField nomePaciente, emailPaciente, telefonePaciente, codigoPaciente, senhaPaciente;
     JButton btnEntrar, btnCancelar;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
-    public RegistroPacienteConvenio() {
+    public RegistroPaciente() {
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        titulo = new JLabel("Registro de Paciente de Convênio");
+        titulo = new JLabel("Registro de Paciente");
         titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 25));
         titulo.setPreferredSize(new Dimension(400, 40));
         titulo.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -46,10 +45,10 @@ public class RegistroPacienteConvenio extends JFrame implements ActionListener {
         componentsFormat.formatLabel(lblTelefonePaciente, panel);
         telefonePaciente = new InputField(false);
         componentsFormat.formatTextField(telefonePaciente, panel);
-        lblConvenio = new JLabel("Convênio");
-        componentsFormat.formatLabel(lblConvenio, panel);
-        convenioPaciente = new InputField(false);
-        componentsFormat.formatTextField(convenioPaciente, panel);
+        lblCodigo = new JLabel("Código");
+        componentsFormat.formatLabel(lblCodigo, panel);
+        codigoPaciente = new InputField(false);
+        componentsFormat.formatTextField(codigoPaciente, panel);
         lblSenhaPaciente = new JLabel("Senha");
         componentsFormat.formatLabel(lblSenhaPaciente, panel);
         senhaPaciente = new InputField(true);
@@ -108,11 +107,11 @@ public class RegistroPacienteConvenio extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 8;
-        panel.add(lblConvenio, gbc);
+        panel.add(lblCodigo, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 9;
-        panel.add(convenioPaciente, gbc);
+        panel.add(codigoPaciente, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 10;
@@ -151,9 +150,9 @@ public class RegistroPacienteConvenio extends JFrame implements ActionListener {
             String email = emailPaciente.getText();
             String telefone = telefonePaciente.getText();
             String senha = senhaPaciente.getText();
-            int codigo = Integer.parseInt(convenioPaciente.getText());
+            int codigo = Integer.parseInt(codigoPaciente.getText());
 
-            Paciente paciente = new Paciente(nome, senha, email, telefone, codigo);
+            Paciente paciente = new Paciente(nome, email, telefone, senha, codigo);
 
             try {
                 PacienteRepository pacienteRepository = new PacienteRepository();
