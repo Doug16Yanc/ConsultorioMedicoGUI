@@ -1,24 +1,29 @@
 package entities;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.UUID;
 
 public class Consulta {
     private UUID id;
     private String motivo;
-    private String agora;
+    private Timestamp agora;
     private Paciente paciente;
     private Medico medico;
+    private boolean status;
 
     public Consulta() {
 
     }
-    public Consulta(String motivo, String agora, Paciente paciente, Medico medico) {
+
+    public Consulta(String motivo, Timestamp agora, Paciente paciente, Medico medico) {
         this.id = UUID.randomUUID();
         this.motivo = motivo;
         this.agora = agora;
         this.paciente = paciente;
         this.medico = medico;
+        this.status = false;
     }
 
     public UUID getId() {
@@ -37,11 +42,11 @@ public class Consulta {
         this.motivo = motivo;
     }
 
-    public String getAgora() {
+    public Timestamp getAgora() {
         return agora;
     }
 
-    public void setAgora(String agora) {
+    public void setAgora(Timestamp agora) {
         this.agora = agora;
     }
 
@@ -59,5 +64,13 @@ public class Consulta {
 
     public void setMedico(Medico medico) {
         this.medico = medico;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

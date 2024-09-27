@@ -176,14 +176,14 @@ public class RegistroMedico extends JFrame implements ActionListener {
             String CRM = crm.getText();
             String especialidadeNome = especialidade.getText();
 
-            Medico medico = new Medico(new Random().nextInt(),nome, CRM, senha, email, telefone, especialidadeNome);
+            Medico medico = new Medico(nome, CRM, senha, email, telefone, especialidadeNome);
 
             try {
                 MedicoRepository medicoRepository = new MedicoRepository();
                 medicoRepository.cadastrarMedico(medico);
                 JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
                 this.dispose();
-                MenuMedico menuMedico = new MenuMedico(new ArrayList<>());
+                MenuMedico menuMedico = new MenuMedico(medico, medicoRepository.pegarConsultasPorMedico(medico));
                 menuMedico.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar médico: " + ex.getMessage());
@@ -191,7 +191,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
 
         }else if(e.getSource() == btnCancelar) {
             this.dispose();
-            LoginMedico loginMedico = new LoginMedico(new ArrayList<>());
+            LoginMedico loginMedico = new LoginMedico();
             loginMedico.setVisible(true);
         }
     }

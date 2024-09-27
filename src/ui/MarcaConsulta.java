@@ -3,12 +3,16 @@ package ui;
 import entities.Consulta;
 import entities.Medico;
 import entities.Paciente;
+import repository.ConsultaRepository;
+import repository.MedicoRepository;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -26,27 +30,26 @@ public class MarcaConsulta extends JFrame implements ActionListener {
     private final Paciente paciente;
     private final List<Consulta> consultas;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
+    private final MedicoRepository medicoRepository = new MedicoRepository();
 
-
-    public MarcaConsulta(Paciente paciente, List<Consulta> consultas) {
+    public MarcaConsulta(Paciente paciente, List<Consulta> consultas) throws SQLException {
         this.paciente = paciente;
         this.consultas = consultas;
 
         setTitle("Marcar consulta");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(800, 800);
         setLocationRelativeTo(null);
 
         marcarConsulta = new Button("Marcar");
         marcarConsulta.setBackground(new Color(0x10C100));
         marcarConsulta.addActionListener(this);
         marcarConsulta.setForeground(Color.WHITE);
-        marcarConsulta.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        marcarConsulta.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
         marcarConsulta.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         add(marcarConsulta);
         marcarConsulta.setActionCommand("Marcar Consulta : ");
 
-        medicos = inicializaMedicos();
+        medicos = (ArrayList<Medico>) medicoRepository.buscarTodosOsMedicos();
 
         JLabel medicoLabel = new JLabel("Selecione o médico:");
         componentsFormat.formatLabel(medicoLabel, new JPanel());
@@ -73,7 +76,7 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         sairButton.setBackground(new Color(0xFF001A));
 
         sairButton.setForeground(Color.WHITE);
-        sairButton.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        sairButton.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
         sairButton.addActionListener(this);
         sairButton.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         add(sairButton);
@@ -87,7 +90,6 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
-
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -120,26 +122,18 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-
-    public ArrayList<Medico> inicializaMedicos() {
-        ArrayList<Medico> medicos = new ArrayList<>();
-        medicos.add(new Medico(123, "Dra. Denise Yanasse", "123456789-87", "senhaDenise123", "denise@clinica.com", "(11) 98765-4321", "Clínica geral"));
-        medicos.add(new Medico(987, "Dr. Douglas Calderoni", "987654321-78", "senhaDouglas987", "douglas@ortopedia.com", "(21) 91234-5678","Ortopedista"));
-        medicos.add(new Medico(456, "Dr. Alceu Scanavini", "876544321-12", "senhaAlceu456", "alceu@psiquiatra.com", "(31) 99876-5432", "Psiquiatra"));
-        medicos.add(new Medico(189, "Dra. Laura Arantes", "998765432-89", "senhaLaura189", "laura@cardio.com", "(41) 92345-6789", "Cardiologista"));
-        medicos.add(new Medico(834, "Dr. Thales Dalessandro", "912345678-45", "senhaThales834", "thales@hemato.com", "(51) 98765-4321", "Hematologista"));
-
-        return medicos;
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Marcar Consulta : ")) {
-            marcaConsulta(paciente, consultas);
+            try {
+                marcaConsulta(paciente, consultas);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
-    public void marcaConsulta(Paciente paciente, List<Consulta> consultas) {
+    public void marcaConsulta(Paciente paciente, List<Consulta> consultas) throws SQLException {
         String motivo = motivoField.getText().trim();
 
         if (motivo.isEmpty()) {
@@ -148,29 +142,29 @@ public class MarcaConsulta extends JFrame implements ActionListener {
             return;
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String agora = LocalDateTime.now().format(formatter);
-
+        LocalDateTime agora = LocalDateTime.now();
+        Timestamp timestampAgora = Timestamp.valueOf(agora);
         Medico medicoSelecionado = medicos.get(medicoComboBox.getSelectedIndex());
-        Consulta consulta = new Consulta(motivo, agora, paciente, medicoSelecionado);
 
+        ConsultaRepository consultaRepository = new ConsultaRepository();
+
+        Consulta consulta = new Consulta(motivo, timestampAgora, paciente, medicoSelecionado);
+        consultaRepository.adicionarConsulta(consulta);
         consultas.add(consulta);
-
         oficializaConsultaComMedico(paciente, consulta, medicoSelecionado);
-
     }
 
     private String oficializaConsultaComMedico(Paciente paciente, Consulta consulta, Medico medico) {
         String message = "\tCOMPROVANTE DE CONSULTA.\n\n" +
                 "Código da consulta : " + consulta.getId() + "\n" +
-                "Data e hora da consulta : " + consulta.getAgora() + "\n" +
+                "Data e hora marcada : " + consulta.getAgora() + "\n" +
                 "Identificador do(a) paciente : " + paciente.getId() + "\n" +
                 "Nome do(a) paciente : " + paciente.getNome() + "\n" +
                 "Paciente relata : " + consulta.getMotivo() + "\n" +
                 "Identificador do(a) médico(a) : " + medico.getId() + "\n" +
                 "Nome do(a) médico(a) : " + medico.getNome();
         outputArea.setText(message);
-        outputArea.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        outputArea.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
         return message;
     }
 }

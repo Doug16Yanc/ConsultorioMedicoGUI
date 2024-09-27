@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Random;
+
 public class Paciente {
     private int id;
     private String nome;
@@ -11,13 +13,12 @@ public class Paciente {
 
     }
 
-    public Paciente(int id, String nome, String email, String telefone, String senha) {
-        this.id = id;
+    public Paciente(String nome, String email, String telefone, String senha) {
+        this.id = new Random().nextInt();
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.senha = senha;
-
     }
 
     public int getId() {

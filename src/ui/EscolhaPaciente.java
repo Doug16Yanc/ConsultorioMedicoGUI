@@ -18,10 +18,8 @@ public class EscolhaPaciente extends JFrame implements ActionListener {
     private Paciente paciente;
     private java.util.List<Consulta> consultas;
 
-
     public EscolhaPaciente(List<Consulta> consultas) {
         setTitle("Tipo de paciente");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setLocationRelativeTo(null);
 
@@ -83,7 +81,6 @@ public class EscolhaPaciente extends JFrame implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 6;
         panel.add(convenioBotao, gbc);
-
 
         add(panel, BorderLayout.CENTER);
 

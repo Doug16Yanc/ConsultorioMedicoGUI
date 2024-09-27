@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
@@ -153,14 +152,14 @@ public class RegistroPacienteConvenio extends JFrame implements ActionListener {
             String telefone = telefonePaciente.getText();
             String senha = senhaPaciente.getText();
 
-            Paciente paciente = new Paciente(new Random().nextInt(), nome, senha, email, telefone);
+            Paciente paciente = new Paciente(nome, senha, email, telefone);
 
             try {
                 PacienteRepository pacienteRepository = new PacienteRepository();
                 pacienteRepository.cadastrarPaciente(paciente);
                 JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
                 this.dispose();
-                MenuPaciente menuPaciente = new MenuPaciente(new ArrayList<>());
+                MenuPaciente menuPaciente = new MenuPaciente(paciente, pacienteRepository.pegarConsultasPorPaciente(paciente));
                 menuPaciente.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente: " + ex.getMessage());
@@ -168,7 +167,7 @@ public class RegistroPacienteConvenio extends JFrame implements ActionListener {
 
         } else if (e.getSource() == btnCancelar) {
             this.dispose();
-            LoginPaciente loginPaciente = new LoginPaciente(new ArrayList<>());
+            LoginPaciente loginPaciente = new LoginPaciente();
             loginPaciente.setVisible(true);
         }
     }

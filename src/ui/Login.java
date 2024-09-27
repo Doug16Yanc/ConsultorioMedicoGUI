@@ -15,10 +15,9 @@ public class Login extends JFrame implements ActionListener {
     private JLabel boasVindas, sou;
     private Image backgroundImage;
     private Paciente paciente;
-    private List<Consulta> consultas;
 
 
-    public Login(List<Consulta> consultas) {
+    public Login() {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
@@ -35,7 +34,7 @@ public class Login extends JFrame implements ActionListener {
         add(boasVindas);
 
         sou = new JLabel("Eu sou...");
-        sou.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 35));
+        sou.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 30));
         sou.setForeground(Color.WHITE);
         add(sou);
 
@@ -83,22 +82,18 @@ public class Login extends JFrame implements ActionListener {
         gbc.gridy = 6;
         panel.add(pacienteBotao, gbc);
 
-
         add(panel, BorderLayout.CENTER);
-
         setVisible(true);
-
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == medicoBotao) {
-            LoginMedico loginMedico = new LoginMedico(consultas);
+            LoginMedico loginMedico = new LoginMedico();
             loginMedico.setVisible(true);
             this.dispose();
         } else if (e.getSource() == pacienteBotao) {
-            LoginPaciente loginPaciente = new LoginPaciente(consultas);
+            LoginPaciente loginPaciente = new LoginPaciente();
             loginPaciente.setVisible(true);
             this.dispose();
 

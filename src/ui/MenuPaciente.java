@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,14 @@ import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class MenuPaciente extends JFrame implements ActionListener {
     private JButton marcarConsulta, verConsultas, btnSair;
-    private Paciente paciente;
     private JLabel icon;
+    private Paciente paciente;
     private List<Consulta> consultas;
 
-    public MenuPaciente(List<Consulta> consultas) {
+    public MenuPaciente(Paciente paciente, List<Consulta> consultas) {
+        this.paciente = paciente;
+        this.consultas = consultas;
+
         setTitle("Menu do paciente");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
@@ -87,20 +91,50 @@ public class MenuPaciente extends JFrame implements ActionListener {
 
         setContentPane(panel);
         setVisible(true);
+
+        JLabel labelMensagem = getjLabel(paciente);
+        JOptionPane.showMessageDialog(this, labelMensagem, "Paciente", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    private static JLabel getjLabel(Paciente paciente) {
+
+        String mensagem = """
+        <html>
+            <body style='margin: 0; height: 100%; display: flex; justify-content: center; align-items: center; font-family: JetBrains Mono; margin-right: 20px margin-top: 30px;'>
+                <div style='text-align: center;'>
+                    <h1 style='font-size: 20px; margin: 0;'>Bem-vindo, <b>""" + paciente.getNome() + """
+                    </b>!</h1>
+                    <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo de volta.</p>
+                    <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e marque novas quando precisar!</p>
+                </div>
+            </body>
+        </html>
+        """;
+
+        JLabel label = new JLabel(mensagem, JLabel.CENTER);
+
+        label.setVerticalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        return label;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == marcarConsulta) {
-            MarcaConsulta marcaConsulta = new MarcaConsulta(paciente, consultas);
-            marcaConsulta.setVisible(true);
-
+            MarcaConsulta marcaConsulta;
+            try {
+                marcaConsulta = new MarcaConsulta(paciente, consultas);
+                marcaConsulta.setVisible(true);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getSource() == verConsultas) {
-            VerConsultas verConsultas = new VerConsultas(paciente, consultas);
+            VerConsultas verConsultas = new VerConsultas(paciente);
             verConsultas.setVisible(true);
         } else if (e.getSource() == btnSair) {
             this.dispose();
-            Login login = new Login(new ArrayList<>());
+            Login login = new Login();
             login.setVisible(true);
         }
     }
