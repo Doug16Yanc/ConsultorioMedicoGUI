@@ -1,24 +1,46 @@
 
-# Sistema de Consultório Médico
+<h1 align="center" width="100%">Sistema de Consultório Médico</h1>
 
+<h2 align="center">
+Java 21 + MySQL 
+</h2>
+
+<p align="center">
+
+<img alt="Java" src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white">
+<img alt="MySQL" src="https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white"
+
+</p>
+
+<p align="center">
 Este é um sistema de consultório médico desenvolvido em Java com interface gráfica Swing e banco de dados MySQL. O sistema permite que pacientes agendem e visualizem consultas, enquanto médicos podem gerenciar essas consultas e visualizar o histórico. Projeto Java realizado para a disciplina de programação orientada a objetos no curso de Análise e Desenvolvimento de Sistemas. O projeto visa automatizar a gestão de um consultório médico, facilitando o acesso e controle das consultas tanto para médicos quanto para pacientes.
 
-## Funcionalidades
+</p>
 
-### Pacientes
-- **Cadastro e Login**: Os pacientes podem se cadastrar e fazer login no sistema.
-- **Agendamento de Consultas**: Os pacientes podem agendar consultas com médicos específicos, informando o motivo da consulta.
-- **Visualização de Consultas**: Os pacientes podem visualizar suas consultas marcadas, incluindo detalhes como data, horário, médico, motivo e status da consulta (Concluída ou Pendente).
+<h2 align="center" width="50%">Funcionalidades</h2>
 
-### Médicos
-- **Cadastro e Login**: Os médicos podem se cadastrar e fazer login no sistema.
-- **Gerenciamento de Consultas**: Os médicos podem visualizar as consultas marcadas para eles.
-- **Realização de Consultas**: Os médicos podem marcar uma consulta como realizada ou dispensá-la.
-- **Histórico de Consultas**: Os médicos têm acesso ao histórico de todas as consultas realizadas por eles.
+<h3 align="center" width="40%">Pacientes</h3>
 
-## Estrutura do Projeto
+<p align="center">
+    
+* Cadastro e Login : Os pacientes podem se cadastrar e fazer login no sistema.
+* Agendamento de Consultas : Os pacientes podem agendar consultas com médicos específicos, informando o motivo da consulta.
+* Visualização de Consultas : Os pacientes podem visualizar suas consultas marcadas, incluindo detalhes como data, horário, médico, motivo e status da consulta (Concluída ou Pendente).
+</p>
 
-### Classes Principais
+<h3 align="center" width="40%">Médicos</h3>
+<p align="center">
+
+* Cadastro e Login : Os médicos podem se cadastrar e fazer login no sistema.
+* Gerenciamento de Consultas : Os médicos podem visualizar as consultas marcadas para eles.
+* Realização de Consultas : Os médicos podem marcar uma consulta como realizada ou dispensá-la.
+* Histórico de Consultas : Os médicos têm acesso ao histórico de todas as consultas realizadas por eles.
+  
+</p>
+
+<h2 align="center"> Estrutura do Projeto </h2>
+
+<h3 align="center">Classes Principais </h3>
 
 #### `Paciente`
 ```java
@@ -59,7 +81,8 @@ public class Medico {
 ```
 Classe que representa um médico no sistema. Cada médico possui um identificador (`id`), nome, CRM, senha, email, telefone e especialidade.
 
-### Conexão com o Banco de Dados
+
+<h2 align="center">Conexão com o Banco de Dados</h2>
 
 A classe `DatabaseConnection` gerencia a conexão com o banco de dados MySQL:
 
@@ -87,7 +110,7 @@ public class DatabaseConnection {
 }
 ```
 
-### Estrutura do Banco de Dados
+<h2 align="center"> Estrutura do Banco de Dados </h2>
 
 O sistema utiliza três tabelas principais:
 
@@ -129,13 +152,13 @@ CREATE TABLE consulta (
 );
 ```
 
-## Requisitos
+<h2 align="center"> Requisitos </h2>
 
-- **Java 21 ou superior**
-- **MySQL 9.0.1 ou superior**
-- **IDE compatível com Java (Eclipse, IntelliJ, NetBeans, etc.)**
+* Java 21 ou superior
+* MySQL 9.0.1 ou superior**
+* IDE compatível com Java (Eclipse, IntelliJ, VS Code, NetBeans, etc.)**
 
-## Configuração do Projeto
+<h2 align="center"> Configuração do Projeto </h2>
 
 1. Clone o repositório:
    ```bash
@@ -160,6 +183,9 @@ CREATE TABLE consulta (
 
 6. Execute o projeto.
 
-## Autores
-  * [Douglas Holanda](https://github.com/Doug16Yanc)
-  * [Wesley Rodrigues](https://github.com/Wesley00s)
+<h2 align="center"> Autores </h2>
+ 
+* [Douglas Holanda](https://github.com/Doug16Yanc)
+* [Wesley Rodrigues](https://github.com/Wesley00s)
+
+
