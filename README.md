@@ -1,4 +1,4 @@
-<h1 align="center" width="100%"> Sistema de consultório médico com Java e Swing </h1>
+<h1 align="center" width="100%"> Sistema de consultório médico com Java, Swing e MySQL </h1>
 
 <p align="center">
 
