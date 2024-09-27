@@ -160,9 +160,9 @@ CREATE TABLE consulta (
 
 <h2 align="center"> Requisitos </h2>
 
-* Java 21 ou superior
-* MySQL 9.0.1 ou superior**
-* IDE compatível com Java (Eclipse, IntelliJ, VS Code, NetBeans, etc.)**
+* **Java 21 ou superior**
+* **MySQL 9.0.1 ou superior**
+* **IDE compatível com Java (Eclipse, IntelliJ, VS Code, NetBeans, etc.)**
 
 <h2 align="center"> Configuração do Projeto </h2>
 
@@ -170,24 +170,28 @@ CREATE TABLE consulta (
    ```bash
    https://github.com/Doug16Yanc/ConsultorioMedicoGUI.git
    ```
-2. Troque a branch para `desenvolvimento`:
+2. Entre na pasta do projeto:
+   ```bash
+   cd ConsultorioMedicoGUI
+   ```
+3. Troque a branch para `desenvolvimento`:
    ```bash
    git checkout desenvolvimento
    ```
-3. Atualize o repositório local:
+4. Atualize o repositório local:
    ```bash
    git pull origin desenvolvimento
    ```
 
-4. Configure o banco de dados MySQL:
+5. Configure o banco de dados MySQL:
     - Crie um banco de dados chamado `healthcare`.
     - Coloque as credenciais necessárias do banco de dados.
     - Execute os scripts SQL acima para criar as tabelas necessárias.
 
-5. Abra o projeto na sua IDE Java e configure as bibliotecas:
+6. Abra o projeto na sua IDE Java e configure as bibliotecas:
     - Adicione o driver JDBC (`mysql-connector-java`) no classpath.
 
-6. Execute o projeto.
+7. Execute o projeto.
 
 <h2 align="center"> Autores </h2>
  
