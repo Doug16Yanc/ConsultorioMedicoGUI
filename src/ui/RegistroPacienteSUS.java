@@ -13,20 +13,20 @@ import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
-public class RegistroPaciente extends JFrame implements ActionListener {
-    JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblSenhaPaciente;
-    JTextField nomePaciente, emailPaciente, telefonePaciente, senhaPaciente;
+public class RegistroPacienteSUS extends JFrame implements ActionListener {
+    JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblSUS, lblSenhaPaciente;
+    JTextField nomePaciente, emailPaciente, telefonePaciente, susPaciente, senhaPaciente;
     JButton btnEntrar, btnCancelar;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
-    public RegistroPaciente() {
+    public RegistroPacienteSUS() {
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        titulo = new JLabel("Registro de Paciente");
+        titulo = new JLabel("Registro de Paciente do SUS");
         titulo.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 25));
         titulo.setPreferredSize(new Dimension(400, 40));
         titulo.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -47,6 +47,10 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         componentsFormat.formatLabel(lblTelefonePaciente, panel);
         telefonePaciente = new InputField(false);
         componentsFormat.formatTextField(telefonePaciente, panel);
+        lblSUS = new JLabel("Número do SUS");
+        componentsFormat.formatLabel(lblSUS, panel);
+        susPaciente = new InputField(false);
+        componentsFormat.formatTextField(susPaciente, panel);
         lblSenhaPaciente = new JLabel("Senha");
         componentsFormat.formatLabel(lblSenhaPaciente, panel);
         senhaPaciente = new InputField(true);
@@ -105,14 +109,22 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 8;
-        panel.add(lblSenhaPaciente, gbc);
+        panel.add(lblSUS, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 9;
-        panel.add(senhaPaciente, gbc);
+        panel.add(susPaciente, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 10;
+        panel.add(lblSenhaPaciente, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 11;
+        panel.add(senhaPaciente, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 12;
         panel.add(Box.createRigidArea(new Dimension(0, 20)), gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -121,7 +133,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         buttonPanel.add(btnCancelar);
 
         gbc.gridx = 0;
-        gbc.gridy = 11;
+        gbc.gridy = 13;
         gbc.gridwidth = 2;
         panel.add(buttonPanel, gbc);
 
@@ -141,14 +153,14 @@ public class RegistroPaciente extends JFrame implements ActionListener {
             String telefone = telefonePaciente.getText();
             String senha = senhaPaciente.getText();
 
-            Paciente paciente = new Paciente(new Random().nextInt(), nome, senha, email, telefone);
+            Paciente paciente = new Paciente(nome, email, telefone, senha);
 
             try {
                 PacienteRepository pacienteRepository = new PacienteRepository();
                 pacienteRepository.cadastrarPaciente(paciente);
                 JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
                 this.dispose();
-                MenuPaciente menuPaciente = new MenuPaciente(new ArrayList<>());
+                MenuPaciente menuPaciente = new MenuPaciente(paciente, pacienteRepository.pegarConsultasPorPaciente(paciente));
                 menuPaciente.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente: " + ex.getMessage());
@@ -156,7 +168,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
         } else if (e.getSource() == btnCancelar) {
             this.dispose();
-            LoginPaciente loginPaciente = new LoginPaciente(new ArrayList<>());
+            LoginPaciente loginPaciente = new LoginPaciente();
             loginPaciente.setVisible(true);
         }
     }

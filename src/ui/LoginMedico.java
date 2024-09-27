@@ -1,13 +1,16 @@
 package ui;
 
 import entities.Consulta;
+import entities.Medico;
 import entities.Paciente;
+import repository.MedicoRepository;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
@@ -15,12 +18,12 @@ import static utilities.Fonts.JET_BRAINS_MONO;
 public class LoginMedico extends JFrame implements ActionListener {
     private JButton btnEntrar, btnCancelar, btnRegistrar;
     private JLabel boasVindas, aviso, titulo, lblOu;
-    private JTextField login, senha;
+    private JTextField crm, senha;
     private Paciente paciente;
     private List<Consulta> consultas;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
-    public LoginMedico(List<Consulta> consultas) {
+    public LoginMedico() {
         setTitle("Login do médico");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +56,7 @@ public class LoginMedico extends JFrame implements ActionListener {
         gbc.gridy = 2;
         panel.add(boasVindas, gbc);
 
-        aviso = new JLabel("Por favor, use seu CRM para fazer login.");
+        aviso = new JLabel("Por favor, use seu CRM e senha.");
         componentsFormat.formatLabel(aviso, panel);
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -63,17 +66,17 @@ public class LoginMedico extends JFrame implements ActionListener {
         gbc.gridy = 4;
         panel.add(Box.createRigidArea(new Dimension(0, 30)), gbc);
 
-        JLabel lbLogin = new JLabel("Login");
-        componentsFormat.formatLabel(lbLogin, panel);
+        JLabel lbCrm = new JLabel("CRM");
+        componentsFormat.formatLabel(lbCrm, panel);
         gbc.gridx = 0;
         gbc.gridy = 5;
-        panel.add(lbLogin, gbc);
-        login = new InputField(false);
-        componentsFormat.formatTextField(login, panel);
+        panel.add(lbCrm, gbc);
+        crm = new InputField(false);
+        componentsFormat.formatTextField(crm, panel);
 
         gbc.gridx = 0;
         gbc.gridy = 6;
-        panel.add(login, gbc);
+        panel.add(crm, gbc);
 
         JLabel lblSenha = new JLabel("Senha");
         componentsFormat.formatLabel(lblSenha, panel);
@@ -151,12 +154,29 @@ public class LoginMedico extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnEntrar) {
-            this.dispose();
-            MenuMedico menuMedico = new MenuMedico(consultas);
-            menuMedico.setVisible(true);
+            if(senha.getText().trim().isEmpty() || crm.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            MedicoRepository medicoRepository = new MedicoRepository();
+
+            try {
+                Medico m = medicoRepository.buscarMedico(crm.getText(), senha.getText());
+
+                if (m != null) {
+                    this.dispose();
+
+                    MenuMedico menuMedico = new MenuMedico(m, medicoRepository.pegarConsultasPorMedico(m));
+                    menuMedico.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Login ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getSource() == btnCancelar) {
             this.dispose();
-            Login login = new Login(consultas);
+            Login login = new Login();
             login.setVisible(true);
         } else if (e.getSource() == btnRegistrar) {
             this.dispose();

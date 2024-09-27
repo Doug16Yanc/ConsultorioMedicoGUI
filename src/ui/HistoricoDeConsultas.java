@@ -2,36 +2,36 @@ package ui;
 
 import entities.Consulta;
 import entities.Medico;
-import entities.Paciente;
-import repository.PacienteRepository;
+import repository.MedicoRepository;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.List;
 
-public class VerConsultas extends JFrame {
+public class HistoricoDeConsultas extends JFrame {
 
-    public VerConsultas(Paciente paciente) {
-        setTitle("Ver Consultas");
+    public HistoricoDeConsultas(Medico medico) {
+        setTitle("Histórico de Consultas");
         setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         try {
-            listarConsultasPorPaciente(paciente);
+            listarHistoricoDeConsultas(medico);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Erro ao buscar consultas: " + e.getMessage(),
+            JOptionPane.showMessageDialog(this, "Erro ao buscar histórico de consultas: " + e.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
         }
+
         setVisible(true);
     }
 
-    public void listarConsultasPorPaciente(Paciente paciente) throws SQLException {
-        PacienteRepository pr = new PacienteRepository();
-        List<Consulta> consultas = pr.pegarConsultasPorPaciente(paciente);
+    public void listarHistoricoDeConsultas(Medico medico) throws SQLException {
+        MedicoRepository mr = new MedicoRepository();
+        List<Consulta> consultas = mr.pegarConsultasPorMedico(medico);
 
-        if (consultas != null && !consultas.isEmpty()) {
+        if (!consultas.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             for (Consulta consulta : consultas) {
                 sb.append(mostraConsultaPaciente(consulta)).append("\n\n");
@@ -44,16 +44,13 @@ public class VerConsultas extends JFrame {
             textArea.setWrapStyleWord(true);
 
             JScrollPane scrollPane = new JScrollPane(textArea);
-            scrollPane.setPreferredSize(new Dimension(700, 500));
-
             add(scrollPane, BorderLayout.CENTER);
         } else {
-            JOptionPane.showMessageDialog(this, "Nenhuma consulta marcada ainda.", "Consultas por Paciente", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Nenhuma consulta marcada ainda.", "Histórico de Consultas", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
     public String mostraConsultaPaciente(Consulta consulta) {
-        Medico medico = consulta.getMedico();
         return "----------------------------------------------------------------------\n" +
                 "Identificador do(a) paciente: " + consulta.getPaciente().getId() + "\n" +
                 "Nome do(a) paciente: " + consulta.getPaciente().getNome() + "\n" +
@@ -62,8 +59,6 @@ public class VerConsultas extends JFrame {
                 "Identificador da consulta: " + consulta.getId() + "\n" +
                 "Motivo da consulta: " + consulta.getMotivo() + "\n" +
                 "Data e hora da consulta: " + consulta.getAgora() + "\n" +
-                "Médico responsável: " + (medico != null ? medico.getNome() : "Não disponível") + "\n" +
-                "Status: " + (consulta.getStatus() ? "Concluída" : "Pedente") + "\n" +
                 "----------------------------------------------------------------------";
     }
 }
