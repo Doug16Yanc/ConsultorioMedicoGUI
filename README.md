@@ -11,6 +11,7 @@ Este é um sistema de consultório médico desenvolvido em Java com interface gr
 - **Visualização de Consultas**: Os pacientes podem visualizar suas consultas marcadas, incluindo detalhes como data, horário, médico, motivo e status da consulta (Concluída ou Pendente).
 
 ### Médicos
+- **Cadastro e Login**: Os médicos podem se cadastrar e fazer login no sistema.
 - **Gerenciamento de Consultas**: Os médicos podem visualizar as consultas marcadas para eles.
 - **Realização de Consultas**: Os médicos podem marcar uma consulta como realizada ou dispensá-la.
 - **Histórico de Consultas**: Os médicos têm acesso ao histórico de todas as consultas realizadas por eles.
