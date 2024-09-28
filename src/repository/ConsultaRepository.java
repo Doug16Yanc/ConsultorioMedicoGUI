@@ -53,6 +53,7 @@ public class ConsultaRepository {
                 paciente.setId(rs.getInt("paciente_id"));
                 paciente.setNome(rs.getString("paciente_nome"));
                 consulta.setPaciente(paciente);
+                consulta.setStatus(rs.getBoolean("status"));
 
                 consultas.add(consulta);
             }
