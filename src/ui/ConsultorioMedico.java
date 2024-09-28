@@ -107,26 +107,22 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // Método para adicionar mensagem ao outputArea com estilo personalizado.
     private void adicionarMensagemOutputArea(String mensagem, Color cor) {
         SimpleAttributeSet attributes = new SimpleAttributeSet();
-        StyleConstants.setForeground(attributes, cor); // Define a cor do texto.
+        StyleConstants.setForeground(attributes, cor);
         StyleConstants.setFontFamily(attributes, JET_BRAINS_MONO.getFontName());
         StyleConstants.setFontSize(attributes, 14);
 
         try {
-            // Adiciona a mensagem ao documento com o estilo configurado.
             Document doc = outputArea.getDocument();
             doc.insertString(doc.getLength(), getTimestamp() + " " + mensagem + "\n", attributes);
 
-            // Faz o scroll automático para a última mensagem adicionada.
             outputArea.setCaretPosition(doc.getLength());
         } catch (BadLocationException e) {
             e.printStackTrace();
         }
     }
 
-    // Método auxiliar para gerar um timestamp formatado.
     private String getTimestamp() {
         return "[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "]";
     }
@@ -171,10 +167,8 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
                             .orElse(null);
 
                     if (consulta != null) {
-                        // Remove a consulta do banco de dados.
                         consultaRepository.removerConsulta(consulta);
 
-                        // Atualiza a interface e adiciona mensagem.
                         adicionarMensagemOutputArea("Consulta dispensada para: " + consulta.getPaciente().getNome(), new Color(255, 69, 0)); // Mensagem em laranja.
 
                         consultas.remove(consulta);
