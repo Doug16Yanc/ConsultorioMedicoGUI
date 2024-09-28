@@ -85,14 +85,13 @@ public class Login extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == medicoBotao) {
+            this.dispose();
             LoginMedico loginMedico = new LoginMedico();
             loginMedico.setVisible(true);
-            this.dispose();
         } else if (e.getSource() == pacienteBotao) {
+            this.dispose();
             LoginPaciente loginPaciente = new LoginPaciente();
             loginPaciente.setVisible(true);
-            this.dispose();
-
         }
     }
 }
