@@ -77,10 +77,10 @@ Classe que representa uma consulta médica. Cada consulta possui um identificado
 public class Medico {
     private int id;
     private String nome;
-    private String CRM;
-    private String senha;
     private String email;
     private String telefone;
+    private String senha;
+    private String CRM;
     private String especialidade;
 }
 ```
