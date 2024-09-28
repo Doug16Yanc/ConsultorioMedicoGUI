@@ -38,7 +38,7 @@ public class HistoricoDeConsultas extends JFrame {
             }
 
             JTextArea textArea = new JTextArea(sb.toString());
-            textArea.setFont(new Font("JetBrains Mono", Font.BOLD, 20));
+            textArea.setFont(new Font("JetBrains Mono", Font.PLAIN, 17));
             textArea.setEditable(false);
             textArea.setLineWrap(true);
             textArea.setWrapStyleWord(true);
@@ -58,7 +58,6 @@ public class HistoricoDeConsultas extends JFrame {
                 "Telefone: " + consulta.getPaciente().getTelefone() + "\n" +
                 "Identificador da consulta: " + consulta.getId() + "\n" +
                 "Motivo da consulta: " + consulta.getMotivo() + "\n" +
-                "Data e hora da consulta: " + consulta.getAgora() + "\n" +
-                "----------------------------------------------------------------------";
+                "Data e hora da consulta: " + consulta.getAgora();
     }
 }
