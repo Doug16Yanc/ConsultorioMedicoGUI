@@ -101,6 +101,8 @@ public class RegistroMedico extends JFrame implements ActionListener {
         gbc.gridy = 3;
         panel.add(nomeMedico, gbc);
 
+        nomeMedico.requestFocusInWindow();
+
         gbc.gridx = 0;
         gbc.gridy = 4;
         panel.add(lblEmailMedico, gbc);

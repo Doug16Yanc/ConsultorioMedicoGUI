@@ -1,6 +1,5 @@
 package ui;
 
-import entities.Consulta;
 import entities.Paciente;
 import repository.PacienteRepository;
 import utilities.ComponentsFormat;
@@ -10,12 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class LoginPaciente extends JFrame implements ActionListener {
-    JTextField login, senha;
+    JTextField email, senha;
     private JButton btnEntrar, btnCancelar, btnRegistrar;
     private JLabel sus, convenio, titulo, lblOu;
 
@@ -67,17 +65,19 @@ public class LoginPaciente extends JFrame implements ActionListener {
         gbc.gridy = 5;
         panel.add(Box.createRigidArea(new Dimension(0, 30)), gbc);
 
-        JLabel lblogin = new JLabel("Login");
+        JLabel lblogin = new JLabel("Email");
         componentsFormat.formatLabel(lblogin, panel);
         gbc.gridx = 0;
         gbc.gridy = 6;
         panel.add(lblogin, gbc);
 
-        login = new InputField(false);
-        componentsFormat.formatTextField(login, panel);
+        email = new InputField(false);
+        componentsFormat.formatTextField(email, panel);
         gbc.gridx = 0;
         gbc.gridy = 7;
-        panel.add(login, gbc);
+        panel.add(email, gbc);
+
+        email.requestFocusInWindow();
 
         JLabel lbsenha = new JLabel("Senha");
         componentsFormat.formatLabel(lbsenha, panel);
@@ -136,7 +136,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setFocusPainted(false);
-        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 18));
+        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 17));
         btnRegistrar.setForeground(Color.WHITE);
         btnRegistrar.setPreferredSize(new Dimension(160, 60));
         btnRegistrar.addActionListener(this);
@@ -158,14 +158,14 @@ public class LoginPaciente extends JFrame implements ActionListener {
             Login login = new Login();
             login.setVisible(true);
         } else if (e.getSource() == btnEntrar) {
-            if(senha.getText().trim().isEmpty() || login.getText().trim().isEmpty()) {
+            if(senha.getText().trim().isEmpty() || email.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             PacienteRepository pacienteRepository = new PacienteRepository();
 
             try {
-                Paciente p = pacienteRepository.buscarPaciente(login.getText(), senha.getText());
+                Paciente p = pacienteRepository.buscarPaciente(email.getText(), senha.getText());
 
                 if (p != null) {
                     this.dispose();
@@ -173,7 +173,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
                     MenuPaciente menuPaciente = new MenuPaciente(p, pacienteRepository.pegarConsultasPorPaciente(p));
                     menuPaciente.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Login ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Email ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);

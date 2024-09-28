@@ -28,7 +28,6 @@ public class LoginMedico extends JFrame implements ActionListener {
         setSize(1920, 1080);
         setLocationRelativeTo(null);
 
-
         JPanel panel = new BackgroundImagePanel("src/images/medico.png");
         panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -75,6 +74,8 @@ public class LoginMedico extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridy = 6;
         panel.add(crm, gbc);
+
+        crm.requestFocusInWindow();
 
         JLabel lblSenha = new JLabel("Senha");
         componentsFormat.formatLabel(lblSenha, panel);
@@ -134,7 +135,7 @@ public class LoginMedico extends JFrame implements ActionListener {
         btnRegistrar.setContentAreaFilled(false);
         btnRegistrar.setBorderPainted(false);
         btnRegistrar.setFocusPainted(false);
-        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 18));
+        btnRegistrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 17));
         btnRegistrar.setForeground(Color.WHITE);
         btnRegistrar.setPreferredSize(new Dimension(160, 60));
         btnRegistrar.addActionListener(this);
@@ -167,7 +168,7 @@ public class LoginMedico extends JFrame implements ActionListener {
                     MenuMedico menuMedico = new MenuMedico(m, medicoRepository.pegarConsultasPorMedico(m));
                     menuMedico.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Login ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "CRM ou senha incorretos", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
