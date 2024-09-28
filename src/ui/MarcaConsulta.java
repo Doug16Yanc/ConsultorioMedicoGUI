@@ -5,6 +5,8 @@ import entities.Medico;
 import entities.Paciente;
 import repository.ConsultaRepository;
 import repository.MedicoRepository;
+import ui.components.Button;
+import ui.components.InputField;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -14,7 +16,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,6 @@ public class MarcaConsulta extends JFrame implements ActionListener {
 
     private ArrayList<Medico> medicos;
     private JComboBox<String> medicoComboBox;
-    private JTextArea outputArea;
     private JTextField motivoField;
     private JButton marcarConsulta, sairButton;
     private final Paciente paciente;
@@ -37,10 +37,10 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         this.consultas = consultas;
 
         setTitle("Marcar consulta");
-        setSize(800, 800);
+        setSize(800, 400);
         setLocationRelativeTo(null);
 
-        marcarConsulta = new Button("Marcar");
+        marcarConsulta = new ui.components.Button("Marcar");
         marcarConsulta.setBackground(new Color(0x10C100));
         marcarConsulta.addActionListener(this);
         marcarConsulta.setForeground(Color.WHITE);
@@ -82,9 +82,6 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         add(sairButton);
         sairButton.addActionListener(e -> dispose());
 
-        outputArea = new JTextArea();
-        outputArea.setEditable(false);
-
         JPanel camposPanel = new JPanel();
         camposPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -105,7 +102,7 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         camposPanel.add(Box.createVerticalStrut(10), gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 2;
         gbc.weighty = 0;
         camposPanel.add(motivoPanel, gbc);
 
@@ -116,7 +113,6 @@ public class MarcaConsulta extends JFrame implements ActionListener {
 
         setLayout(new BorderLayout());
         add(camposPanel, BorderLayout.NORTH);
-        add(new JScrollPane(outputArea), BorderLayout.CENTER);
         add(botoesPanel, BorderLayout.SOUTH);
 
         setVisible(true);
@@ -151,20 +147,9 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         Consulta consulta = new Consulta(motivo, timestampAgora, paciente, medicoSelecionado);
         consultaRepository.adicionarConsulta(consulta);
         consultas.add(consulta);
-        oficializaConsultaComMedico(paciente, consulta, medicoSelecionado);
-    }
 
-    private String oficializaConsultaComMedico(Paciente paciente, Consulta consulta, Medico medico) {
-        String message = "\tCOMPROVANTE DE CONSULTA.\n\n" +
-                "Código da consulta : " + consulta.getId() + "\n" +
-                "Data e hora marcada : " + consulta.getAgora() + "\n" +
-                "Identificador do(a) paciente : " + paciente.getId() + "\n" +
-                "Nome do(a) paciente : " + paciente.getNome() + "\n" +
-                "Paciente relata : " + consulta.getMotivo() + "\n" +
-                "Identificador do(a) médico(a) : " + medico.getId() + "\n" +
-                "Nome do(a) médico(a) : " + medico.getNome();
-        outputArea.setText(message);
-        outputArea.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        return message;
+        dispose();
+
+        new ComprovanteConsulta(consulta);
     }
 }

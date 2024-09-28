@@ -1,21 +1,17 @@
 package ui;
 
-import entities.Consulta;
-import entities.Paciente;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class Login extends JFrame implements ActionListener {
     private JButton medicoBotao, pacienteBotao;
     private JLabel boasVindas, sou;
-    private Image backgroundImage;
-    private Paciente paciente;
-
 
     public Login() {
         setTitle("Login");
@@ -38,7 +34,7 @@ public class Login extends JFrame implements ActionListener {
         sou.setForeground(Color.WHITE);
         add(sou);
 
-        medicoBotao = new Button("Médico");
+        medicoBotao = new ui.components.Button("Médico");
         medicoBotao.setBackground(new Color(0x2773FF));
         medicoBotao.setForeground(Color.WHITE);
         medicoBotao.setBorder(BorderFactory.createEmptyBorder(15, 100, 15, 100));

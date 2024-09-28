@@ -2,6 +2,9 @@ package ui;
 
 import entities.Medico;
 import repository.MedicoRepository;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
+import ui.components.InputField;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -64,7 +67,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
         especialidade.setPreferredSize(new Dimension(245, 50));
 
 
-        btnCadastrar = new Button("Cadastrar");
+        btnCadastrar = new ui.components.Button("Cadastrar");
         btnCadastrar.setBackground(new Color(0x2773FF));
         btnCadastrar.setForeground(Color.WHITE);
         btnCadastrar.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));

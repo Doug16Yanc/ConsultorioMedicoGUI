@@ -1,9 +1,10 @@
 package ui;
 
-import entities.Consulta;
 import entities.Medico;
-import entities.Paciente;
 import repository.MedicoRepository;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
+import ui.components.InputField;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -11,7 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
@@ -94,7 +94,7 @@ public class LoginMedico extends JFrame implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(0, 20)), gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnEntrar = new Button("Entrar");
+        btnEntrar = new ui.components.Button("Entrar");
         btnEntrar.setBackground(new Color(0x2773FF));
         btnEntrar.setForeground(Color.WHITE);
         btnEntrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));

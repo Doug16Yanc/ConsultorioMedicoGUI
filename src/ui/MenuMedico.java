@@ -2,14 +2,14 @@ package ui;
 
 import entities.Consulta;
 import entities.Medico;
-import entities.Paciente;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
@@ -45,7 +45,7 @@ public class MenuMedico extends JFrame implements ActionListener {
         gbc.gridy = 1;
         panel.add(Box.createRigidArea(new Dimension(0, 50)), gbc);
 
-        verConsultorio = new Button("Ver consultório");
+        verConsultorio = new ui.components.Button("Ver consultório");
         verConsultorio.setBackground(new Color(0x2773FF));
         verConsultorio.setPreferredSize(new Dimension(400, 60));
         verConsultorio.setForeground(Color.WHITE);
@@ -60,7 +60,7 @@ public class MenuMedico extends JFrame implements ActionListener {
         gbc.gridy = 3;
         panel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
-        verConsultas = new Button("Ver histórico de consultas");
+        verConsultas = new ui.components.Button("Ver histórico de consultas");
         verConsultas.setBackground(new Color(0x2773FF));
         verConsultas.setPreferredSize(new Dimension(400, 60));
 
@@ -99,9 +99,9 @@ public class MenuMedico extends JFrame implements ActionListener {
         <html>
             <body style='margin: 0; height: 100%; display: flex; justify-content: center; align-items: center; font-family: JetBrains Mono; margin-right: 20px margin-top: 30px;'>
                 <div style='text-align: center;'>
-                    <h1 style='font-size: 20px; margin: 0;'>Bem-vindo, <b>""" + medico.getNome() + """
+                    <h1 style='font-size: 20px; margin: 0;'>Bem-vindo(a), <b>""" + medico.getNome() + """
                     </b>!</h1>
-                    <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo de volta.</p>
+                    <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo(a) de volta.</p>
                     <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e conlcua outras pendentes!</p>
                 </div>
             </body>

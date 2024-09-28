@@ -2,6 +2,9 @@ package ui;
 
 import entities.Paciente;
 import repository.PacienteRepository;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
+import ui.components.InputField;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -51,7 +54,7 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         senhaPaciente = new InputField(true);
         componentsFormat.formatTextField(senhaPaciente, panel);
 
-        btnCadastrar = new Button("Cadastrar");
+        btnCadastrar = new ui.components.Button("Cadastrar");
         btnCadastrar.setBackground(new Color(0x2773FF));
         btnCadastrar.setForeground(Color.WHITE);
         btnCadastrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));

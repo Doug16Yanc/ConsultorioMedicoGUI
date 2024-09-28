@@ -3,13 +3,20 @@ package ui;
 import entities.Consulta;
 import entities.Medico;
 import repository.ConsultaRepository;
+import ui.components.Button;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
@@ -29,7 +36,7 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
         setSize(800, 600);
         setLocationRelativeTo(null);
 
-        realizarConsulta = new Button("Realizar consulta");
+        realizarConsulta = new ui.components.Button("Realizar consulta");
         realizarConsulta.setBackground(new Color(0x10C100));
         realizarConsulta.addActionListener(this);
         realizarConsulta.setForeground(Color.WHITE);
@@ -100,6 +107,30 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    // Método para adicionar mensagem ao outputArea com estilo personalizado.
+    private void adicionarMensagemOutputArea(String mensagem, Color cor) {
+        SimpleAttributeSet attributes = new SimpleAttributeSet();
+        StyleConstants.setForeground(attributes, cor); // Define a cor do texto.
+        StyleConstants.setFontFamily(attributes, JET_BRAINS_MONO.getFontName());
+        StyleConstants.setFontSize(attributes, 14);
+
+        try {
+            // Adiciona a mensagem ao documento com o estilo configurado.
+            Document doc = outputArea.getDocument();
+            doc.insertString(doc.getLength(), getTimestamp() + " " + mensagem + "\n", attributes);
+
+            // Faz o scroll automático para a última mensagem adicionada.
+            outputArea.setCaretPosition(doc.getLength());
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método auxiliar para gerar um timestamp formatado.
+    private String getTimestamp() {
+        return "[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "]";
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == realizarConsulta) {
@@ -115,39 +146,47 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
 
                     if (consulta != null) {
                         consultaRepository.realizarConsulta(consulta);
-                        outputArea.append("Consulta realizada com sucesso para: " + consulta.getPaciente().getNome() + "\n");
+                        adicionarMensagemOutputArea("Consulta realizada com sucesso para: " + consulta.getPaciente().getNome(), new Color(0, 128, 0)); // Mensagem em verde.
 
                         consultas.remove(consulta);
                         pacientesComboBox.removeItem(selectedItem);
                     } else {
-                        outputArea.append("Erro ao realizar a consulta.\n");
+                        adicionarMensagemOutputArea("Erro ao realizar a consulta.", Color.RED); // Mensagem em vermelho.
                     }
                 } catch (SQLException ex) {
-                    outputArea.append("Erro ao concluir a consulta: " + ex.getMessage() + "\n");
+                    adicionarMensagemOutputArea("Erro ao concluir a consulta: " + ex.getMessage(), Color.RED);
                 }
             } else {
-                outputArea.append("Por favor, selecione uma consulta válida.\n");
+                adicionarMensagemOutputArea("Por favor, selecione uma consulta válida.", Color.ORANGE); // Mensagem em laranja.
             }
         } else if (e.getSource() == btnDispensar) {
             String selectedItem = (String) pacientesComboBox.getSelectedItem();
             if (selectedItem != null && !selectedItem.equals("Nenhuma consulta pendente.")) {
-                String[] partes = selectedItem.split(" - ");
-                String motivo = partes[1];
-                Consulta consulta = consultas.stream()
-                        .filter(c -> c.getMotivo().equals(motivo) && !c.getStatus())
-                        .findFirst()
-                        .orElse(null);
+                try {
+                    String[] partes = selectedItem.split(" - ");
+                    String motivo = partes[1];
+                    Consulta consulta = consultas.stream()
+                            .filter(c -> c.getMotivo().equals(motivo) && !c.getStatus())
+                            .findFirst()
+                            .orElse(null);
 
-                if (consulta != null) {
-                    outputArea.append("Consulta dispensada para: " + consulta.getPaciente().getNome() + "\n");
+                    if (consulta != null) {
+                        // Remove a consulta do banco de dados.
+                        consultaRepository.removerConsulta(consulta);
 
-                    consultas.remove(consulta);
-                    pacientesComboBox.removeItem(selectedItem);
-                } else {
-                    outputArea.append("Erro ao dispensar a consulta.\n");
+                        // Atualiza a interface e adiciona mensagem.
+                        adicionarMensagemOutputArea("Consulta dispensada para: " + consulta.getPaciente().getNome(), new Color(255, 69, 0)); // Mensagem em laranja.
+
+                        consultas.remove(consulta);
+                        pacientesComboBox.removeItem(selectedItem);
+                    } else {
+                        adicionarMensagemOutputArea("Erro ao dispensar a consulta.", Color.RED); // Mensagem em vermelho.
+                    }
+                } catch (SQLException ex) {
+                    adicionarMensagemOutputArea("Erro ao dispensar a consulta: " + ex.getMessage(), Color.RED);
                 }
             } else {
-                outputArea.append("Por favor, selecione uma consulta válida.\n");
+                adicionarMensagemOutputArea("Por favor, selecione uma consulta válida.", Color.ORANGE);
             }
         }
     }

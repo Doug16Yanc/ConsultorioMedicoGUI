@@ -2,6 +2,9 @@ package ui;
 
 import entities.Paciente;
 import repository.PacienteRepository;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
+import ui.components.InputField;
 import utilities.ComponentsFormat;
 
 import javax.swing.*;
@@ -96,7 +99,7 @@ public class LoginPaciente extends JFrame implements ActionListener {
         panel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        btnEntrar = new Button("Entrar");
+        btnEntrar = new ui.components.Button("Entrar");
         btnEntrar.setBackground(new Color(0x2773FF));
         btnEntrar.setForeground(Color.WHITE);
         btnEntrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));

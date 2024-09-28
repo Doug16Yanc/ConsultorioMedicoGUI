@@ -2,13 +2,14 @@ package ui;
 
 import entities.Consulta;
 import entities.Paciente;
+import ui.components.BackgroundImagePanel;
+import ui.components.Button;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
@@ -44,7 +45,7 @@ public class MenuPaciente extends JFrame implements ActionListener {
         gbc.gridy = 1;
         panel.add(Box.createRigidArea(new Dimension(0, 50)), gbc);
 
-        marcarConsulta = new Button("Marcar consulta");
+        marcarConsulta = new ui.components.Button("Marcar consulta");
         marcarConsulta.setBackground(new Color(0x2773FF));
         marcarConsulta.setPreferredSize(new Dimension(400, 60));
 
@@ -61,7 +62,7 @@ public class MenuPaciente extends JFrame implements ActionListener {
         gbc.gridy = 3;
         panel.add(Box.createRigidArea(new Dimension(0, 10)), gbc);
 
-        verConsultas = new Button("Ver minhas consultas");
+        verConsultas = new ui.components.Button("Ver minhas consultas");
         verConsultas.setBackground(new Color(0x2773FF));
         verConsultas.setPreferredSize(new Dimension(400, 60));
 
@@ -103,9 +104,9 @@ public class MenuPaciente extends JFrame implements ActionListener {
         <html>
             <body style='margin: 0; height: 100%; display: flex; justify-content: center; align-items: center; font-family: JetBrains Mono; margin-right: 20px margin-top: 30px;'>
                 <div style='text-align: center;'>
-                    <h1 style='font-size: 20px; margin: 0;'>Bem-vindo, <b>""" + paciente.getNome() + """
+                    <h1 style='font-size: 20px; margin: 0;'>Bem-vindo(a), <b>""" + paciente.getNome() + """
                     </b>!</h1>
-                    <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo de volta.</p>
+                    <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo(a) de volta.</p>
                     <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e marque novas quando precisar!</p>
                 </div>
             </body>
