@@ -8,15 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class RegistroMedico extends JFrame implements ActionListener {
     JLabel titulo, lblNomeMedico, lblEmailMedico, lblTelefoneMedico, lblSenhaMedico, lblCrm, lblEspecialidade;
     JTextField nomeMedico, emailMedico, telefoneMedico, senhaMedico, crm, especialidade;
-    JButton btnEntrar, btnCancelar;
+    JButton btnCadastrar, btnCancelar;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public RegistroMedico() {
@@ -66,15 +64,15 @@ public class RegistroMedico extends JFrame implements ActionListener {
         especialidade.setPreferredSize(new Dimension(245, 50));
 
 
-        btnEntrar = new Button("Entrar");
-        btnEntrar.setBackground(new Color(0x2773FF));
-        btnEntrar.setForeground(Color.WHITE);
-        btnEntrar.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
-        btnEntrar.addActionListener(this);
-        btnEntrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        btnEntrar.setPreferredSize(new Dimension(250, 60));
-        btnEntrar.setLayout(new FlowLayout(FlowLayout.LEFT));
-        add(btnEntrar);
+        btnCadastrar = new Button("Cadastrar");
+        btnCadastrar.setBackground(new Color(0x2773FF));
+        btnCadastrar.setForeground(Color.WHITE);
+        btnCadastrar.setBorder(BorderFactory.createEmptyBorder(20,100,20,100));
+        btnCadastrar.addActionListener(this);
+        btnCadastrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        btnCadastrar.setPreferredSize(new Dimension(250, 60));
+        btnCadastrar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        add(btnCadastrar);
 
         btnCancelar = new Button("Cancelar");
         btnCancelar.setBackground(new Color(0x2FF001A));
@@ -153,7 +151,7 @@ public class RegistroMedico extends JFrame implements ActionListener {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setOpaque(false);
-        buttonPanel.add(btnEntrar);
+        buttonPanel.add(btnCadastrar);
         buttonPanel.add(btnCancelar);
 
         gbc.gridx = 0;
@@ -170,23 +168,27 @@ public class RegistroMedico extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnEntrar) {
+        if (e.getSource() == btnCadastrar) {
             String nome = nomeMedico.getText();
             String email = emailMedico.getText();
             String telefone = telefoneMedico.getText();
             String senha = senhaMedico.getText();
             String CRM = crm.getText();
             String especialidadeNome = especialidade.getText();
+            if (nome.trim().isEmpty() || email.trim().isEmpty() || telefone.trim().isEmpty() || senha.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             Medico medico = new Medico(nome, email, telefone, senha, CRM, especialidadeNome);
 
             try {
                 MedicoRepository medicoRepository = new MedicoRepository();
                 medicoRepository.cadastrarMedico(medico);
-                JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso!");
+                JOptionPane.showMessageDialog(this, "Médico cadastrado com sucesso! Vocẽ será redirecionado para página de login!");
                 this.dispose();
-                MenuMedico menuMedico = new MenuMedico(medico, medicoRepository.pegarConsultasPorMedico(medico));
-                menuMedico.setVisible(true);
+                LoginMedico loginMedico = new LoginMedico();
+                loginMedico.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar médico: " + ex.getMessage());
             }

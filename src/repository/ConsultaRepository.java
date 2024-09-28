@@ -25,7 +25,7 @@ public class ConsultaRepository {
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Erro ao adicionar consulta: " + e.getMessage());
-            throw new SQLException("Erro ao tentar cadastrar médico no banco de dados.", e);
+            throw new SQLException("Erro ao tentar adicionar consulta no banco de dados.", e);
         }
     }
 

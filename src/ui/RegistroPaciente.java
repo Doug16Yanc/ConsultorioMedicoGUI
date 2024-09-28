@@ -8,13 +8,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import static utilities.Fonts.JET_BRAINS_MONO;
 
 public class RegistroPaciente extends JFrame implements ActionListener {
     JLabel titulo, lblNomePaciente, lblEmail, lblTelefonePaciente, lblCodigo, lblSenhaPaciente;
-    JTextField nomePaciente, emailPaciente, telefonePaciente, codigoPaciente, senhaPaciente;
-    JButton btnEntrar, btnCancelar;
+    JTextField nomePaciente, emailPaciente, telefonePaciente, senhaPaciente;
+    JButton btnCadastrar, btnCancelar;
     private final ComponentsFormat componentsFormat = new ComponentsFormat();
 
     public RegistroPaciente() {
@@ -45,25 +46,21 @@ public class RegistroPaciente extends JFrame implements ActionListener {
         componentsFormat.formatLabel(lblTelefonePaciente, panel);
         telefonePaciente = new InputField(false);
         componentsFormat.formatTextField(telefonePaciente, panel);
-        lblCodigo = new JLabel("Código");
-        componentsFormat.formatLabel(lblCodigo, panel);
-        codigoPaciente = new InputField(false);
-        componentsFormat.formatTextField(codigoPaciente, panel);
         lblSenhaPaciente = new JLabel("Senha");
         componentsFormat.formatLabel(lblSenhaPaciente, panel);
         senhaPaciente = new InputField(true);
         componentsFormat.formatTextField(senhaPaciente, panel);
 
-        btnEntrar = new Button("Registrar");
-        btnEntrar.setBackground(new Color(0x2773FF));
-        btnEntrar.setForeground(Color.WHITE);
-        btnEntrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
-        btnEntrar.addActionListener(this);
-        btnEntrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
-        btnEntrar.setPreferredSize(new Dimension(250, 60));
-        btnEntrar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        btnCadastrar = new Button("Cadastrar");
+        btnCadastrar.setBackground(new Color(0x2773FF));
+        btnCadastrar.setForeground(Color.WHITE);
+        btnCadastrar.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
+        btnCadastrar.addActionListener(this);
+        btnCadastrar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        btnCadastrar.setPreferredSize(new Dimension(250, 60));
+        btnCadastrar.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        add(btnEntrar);
+        add(btnCadastrar);
         btnCancelar = new Button("Cancelar");
         btnCancelar.setBackground(new Color(0x2FF001A));
         btnCancelar.setForeground(Color.WHITE);
@@ -109,31 +106,23 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 8;
-        panel.add(lblCodigo, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 9;
-        panel.add(codigoPaciente, gbc);
-
-        gbc.gridx = 0;
-        gbc.gridy = 10;
         panel.add(lblSenhaPaciente, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 11;
+        gbc.gridy = 9;
         panel.add(senhaPaciente, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 12;
+        gbc.gridy = 10;
         panel.add(Box.createRigidArea(new Dimension(0, 20)), gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         buttonPanel.setOpaque(false);
-        buttonPanel.add(btnEntrar);
+        buttonPanel.add(btnCadastrar);
         buttonPanel.add(btnCancelar);
 
         gbc.gridx = 0;
-        gbc.gridy = 13;
+        gbc.gridy = 11;
         gbc.gridwidth = 2;
         panel.add(buttonPanel, gbc);
 
@@ -146,23 +135,27 @@ public class RegistroPaciente extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnEntrar) {
-
+        if (e.getSource() == btnCadastrar) {
             String nome = nomePaciente.getText();
             String email = emailPaciente.getText();
             String telefone = telefonePaciente.getText();
             String senha = senhaPaciente.getText();
-            int codigo = Integer.parseInt(codigoPaciente.getText());
+            int codigo = new Random().nextInt(1000);
+
+            if (nome.trim().isEmpty() || email.trim().isEmpty() || telefone.trim().isEmpty() || senha.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             Paciente paciente = new Paciente(nome, email, telefone, senha, codigo);
 
             try {
                 PacienteRepository pacienteRepository = new PacienteRepository();
                 pacienteRepository.cadastrarPaciente(paciente);
-                JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso!");
+                JOptionPane.showMessageDialog(this, "Paciente cadastrado com sucesso! Vocẽ será redirecionado para página de login!");
                 this.dispose();
-                MenuPaciente menuPaciente = new MenuPaciente(paciente, pacienteRepository.pegarConsultasPorPaciente(paciente));
-                menuPaciente.setVisible(true);
+                LoginPaciente loginPaciente = new LoginPaciente();
+                loginPaciente.setVisible(true);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao cadastrar paciente: " + ex.getMessage());
             }
