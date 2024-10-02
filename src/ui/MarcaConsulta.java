@@ -41,11 +41,11 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
         marcarConsulta = new ui.components.Button("Marcar");
-        marcarConsulta.setBackground(new Color(0x10C100));
+        marcarConsulta.setBackground(new Color(0x2773FF));
         marcarConsulta.addActionListener(this);
         marcarConsulta.setForeground(Color.WHITE);
         marcarConsulta.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
-        marcarConsulta.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        marcarConsulta.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
         add(marcarConsulta);
         marcarConsulta.setActionCommand("Marcar Consulta : ");
 
@@ -78,7 +78,7 @@ public class MarcaConsulta extends JFrame implements ActionListener {
         sairButton.setForeground(Color.WHITE);
         sairButton.setBorder(BorderFactory.createEmptyBorder(20, 100, 20, 100));
         sairButton.addActionListener(this);
-        sairButton.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 20));
+        sairButton.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
         add(sairButton);
         sairButton.addActionListener(e -> dispose());
 

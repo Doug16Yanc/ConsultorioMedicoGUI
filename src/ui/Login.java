@@ -14,7 +14,7 @@ public class Login extends JFrame implements ActionListener {
     private JLabel boasVindas, sou;
 
     public Login() {
-        setTitle("Login");
+        setTitle("Sistema de consultório médico");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setLocationRelativeTo(null);

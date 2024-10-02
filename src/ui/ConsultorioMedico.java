@@ -37,11 +37,11 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
 
         realizarConsulta = new ui.components.Button("Realizar consulta");
-        realizarConsulta.setBackground(new Color(0x10C100));
+        realizarConsulta.setBackground(new Color(0x2773FF));
         realizarConsulta.addActionListener(this);
         realizarConsulta.setForeground(Color.WHITE);
         realizarConsulta.setBorder(BorderFactory.createEmptyBorder(17, 65, 17, 65));
-        realizarConsulta.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 15));
+        realizarConsulta.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
         add(realizarConsulta);
         realizarConsulta.setActionCommand("Consultas : ");
 
@@ -69,7 +69,7 @@ public class ConsultorioMedico extends JFrame implements ActionListener {
         btnDispensar.setForeground(Color.WHITE);
         btnDispensar.setBorder(BorderFactory.createEmptyBorder(17, 65, 17, 65));
         btnDispensar.addActionListener(this);
-        btnDispensar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.PLAIN, 15));
+        btnDispensar.setFont(new Font(JET_BRAINS_MONO.getFontName(), Font.BOLD, 20));
         add(btnDispensar);
 
         outputArea = new JTextArea();
