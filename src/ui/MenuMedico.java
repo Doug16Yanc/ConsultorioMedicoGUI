@@ -24,7 +24,7 @@ public class MenuMedico extends JFrame implements ActionListener {
         this.medico = medico;
         this.consultas = consultas;
 
-        setTitle("Menu do médico");
+        setTitle("Área do médico");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setLocationRelativeTo(null);
@@ -34,7 +34,7 @@ public class MenuMedico extends JFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        ImageIcon imageIcon = new ImageIcon("src/icons/iconMedical.png");
+        ImageIcon imageIcon = new ImageIcon("src/icons/medicos.png");
         icon = new JLabel(imageIcon);
 
         gbc.gridx = 0;
@@ -102,7 +102,7 @@ public class MenuMedico extends JFrame implements ActionListener {
                     <h1 style='font-size: 20px; margin: 0;'>Bem-vindo(a), <b>""" + medico.getNome() + """
                     </b>!</h1>
                     <p style='font-size: 14px; color: #555; margin-top: 15px;'>Estamos felizes em tê-lo(a) de volta.</p>
-                    <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e conlcua outras pendentes!</p>
+                    <p style='font-size: 14px; color: #2773FF; margin-top: 30px; margin-bottom: 30px;'>Confira suas consultas e conclua outras pendentes!</p>
                 </div>
             </body>
         </html>

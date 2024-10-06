@@ -24,7 +24,7 @@ public class MenuPaciente extends JFrame implements ActionListener {
         this.paciente = paciente;
         this.consultas = consultas;
 
-        setTitle("Menu do paciente");
+        setTitle("Área do paciente");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1920, 1080);
         setLocationRelativeTo(null);
@@ -34,7 +34,7 @@ public class MenuPaciente extends JFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(0, 0, 0, 0);
 
-        ImageIcon imageIcon = new ImageIcon("src/icons/iconPatient.png");
+        ImageIcon imageIcon = new ImageIcon("src/icons/pacientes.png");
         icon = new JLabel(imageIcon);
 
         gbc.gridx = 0;
